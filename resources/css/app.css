@@ -1,0 +1,682 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .bg-cinematic-gradient {
+        background: linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.7) 40%, rgba(10, 10, 10, 0) 100%);
+    }
+}
+
+body {
+    background-color: #0a0a0a;
+    color: white;
+}
+
+/* ==========================================================================
+   LIGHT MODE STYLING SYSTEM (Chế độ nền sáng)
+   ========================================================================== */
+
+/* Smooth theme transition */
+html, body, header, main, footer, .bg-cinematic-dark {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+html.light-mode body {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+html.light-mode .bg-cinematic-dark {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+/* Header in Light Mode */
+html.light-mode header {
+    background: rgba(255, 255, 255, 0.94) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid #e2e8f0 !important;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light-mode header a.font-serif {
+    color: #0f172a !important;
+}
+
+html.light-mode header nav a {
+    color: #334155 !important;
+}
+
+html.light-mode header nav a:hover,
+html.light-mode header nav a.text-cinematic-gold {
+    color: #d4af37 !important;
+}
+
+/* Search Bar in Light Mode */
+html.light-mode #header-search-container form > div {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light-mode #header-search-container form > div:focus-within {
+    border-color: #d4af37 !important;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2) !important;
+}
+
+html.light-mode #header-search-input {
+    color: #0f172a !important;
+}
+
+html.light-mode #header-search-input::placeholder {
+    color: #94a3b8 !important;
+}
+
+html.light-mode #header-search-container svg {
+    color: #64748b !important;
+}
+
+html.light-mode #header-search-suggestions {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.12) !important;
+    color: #0f172a !important;
+}
+
+html.light-mode #header-search-suggestions .text-white {
+    color: #0f172a !important;
+}
+
+html.light-mode #header-search-suggestions .text-gray-300,
+html.light-mode #header-search-suggestions .text-gray-400 {
+    color: #64748b !important;
+}
+
+html.light-mode #header-search-suggestions a:hover {
+    background-color: #f1f5f9 !important;
+}
+
+/* Header Buttons (Theme Toggle, Admin, Avatar, Hamburger) */
+html.light-mode #theme-toggle,
+html.light-mode header a[title="Quản trị"],
+html.light-mode header .group > button.w-9 {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #334155 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light-mode #theme-toggle:hover,
+html.light-mode header .group > button.w-9:hover {
+    background-color: #e2e8f0 !important;
+    border-color: #94a3b8 !important;
+}
+
+html.light-mode header a[title="Quản trị"]:hover {
+    background-color: #fee2e2 !important;
+    border-color: #fca5a5 !important;
+}
+
+html.light-mode header a[title="Quản trị"]:hover svg {
+    color: #dc2626 !important;
+}
+
+html.light-mode #theme-toggle svg,
+html.light-mode header a[title="Quản trị"] svg,
+html.light-mode header .group > button.w-9 svg {
+    color: #334155 !important;
+}
+
+html.light-mode #mobile-menu-toggle {
+    color: #334155 !important;
+}
+
+/* User Dropdown Menu & Mobile Navigation Drawer */
+html.light-mode header .group .absolute.right-0 {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.12) !important;
+    color: #0f172a !important;
+}
+
+html.light-mode header .group .border-b,
+html.light-mode header .group .border-t {
+    border-color: #f1f5f9 !important;
+}
+
+html.light-mode header .group a {
+    color: #334155 !important;
+}
+
+html.light-mode header .group a:hover {
+    background-color: #f8fafc !important;
+    color: #e50914 !important;
+}
+
+html.light-mode header .group .text-white {
+    color: #0f172a !important;
+}
+
+html.light-mode header .group .text-gray-400 {
+    color: #64748b !important;
+}
+
+html.light-mode #mobile-nav-menu {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    border-color: #e2e8f0 !important;
+    color: #0f172a !important;
+    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.15) !important;
+}
+
+html.light-mode #mobile-nav-menu a {
+    color: #334155 !important;
+}
+
+html.light-mode #mobile-nav-menu a:hover,
+html.light-mode #mobile-nav-menu a.text-cinematic-gold {
+    color: #e50914 !important;
+}
+
+html.light-mode #mobile-nav-menu .border-t {
+    border-color: #e2e8f0 !important;
+}
+
+html.light-mode #mobile-theme-toggle {
+    background-color: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #334155 !important;
+}
+
+/* Headings & General Text in Light Mode */
+html.light-mode h1,
+html.light-mode h2,
+html.light-mode h3,
+html.light-mode h4,
+html.light-mode h5 {
+    color: #0f172a;
+}
+
+html.light-mode p {
+    color: #475569;
+}
+
+html.light-mode .text-gray-200,
+html.light-mode .text-gray-300 {
+    color: #334155 !important;
+}
+
+html.light-mode .text-gray-400 {
+    color: #64748b !important;
+}
+
+html.light-mode .border-white\/10,
+html.light-mode .border-white\/20,
+html.light-mode .border-white\/30,
+html.light-mode .border-white\/5 {
+    border-color: #e2e8f0 !important;
+}
+
+/* Preserve White Text for Hero Carousels & Dark Backgrounds */
+html.light-mode .heroSwiper .text-white,
+html.light-mode .heroSwiper h1,
+html.light-mode .heroSwiper p,
+html.light-mode .heroSwiper span.text-gray-300,
+html.light-mode .relative.h-screen .text-white,
+html.light-mode .relative.h-screen h1,
+html.light-mode .relative.h-screen p,
+html.light-mode .relative.h-screen span.text-gray-300,
+html.light-mode .bg-cinematic-red,
+html.light-mode .bg-cinematic-red *,
+html.light-mode a.bg-cinematic-red,
+html.light-mode button.bg-cinematic-red,
+html.light-mode .bg-red-600,
+html.light-mode .bg-red-600 *,
+html.light-mode .bg-blue-600,
+html.light-mode .bg-blue-600 * {
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
+   VIP MEMBERSHIP CARD (Screenshot 1 Fix)
+   ========================================================================== */
+html.light-mode .membership-card {
+    background: linear-gradient(135deg, #181c26 0%, #0c0e14 100%) !important;
+    border: 1px solid rgba(212, 175, 55, 0.45) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 20px rgba(212, 175, 55, 0.1) !important;
+}
+
+html.light-mode .membership-card h2,
+html.light-mode .membership-card .text-white,
+html.light-mode .membership-card span.text-white {
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+html.light-mode .membership-card p.text-gray-400,
+html.light-mode .membership-card span.text-gray-400 {
+    color: #94a3b8 !important;
+}
+
+html.light-mode .membership-card .border-white\/10 {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ==========================================================================
+   MAP OVERLAY BADGE (Screenshot 3 Fix)
+   ========================================================================== */
+html.light-mode .map-overlay-badge {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12) !important;
+}
+
+html.light-mode .map-overlay-badge span.text-gray-200,
+html.light-mode .map-overlay-badge span:not(.rounded-full) {
+    color: #0f172a !important;
+    font-weight: 600 !important;
+}
+
+/* ==========================================================================
+   CHECKOUT PAGE (Screenshot 2 Fix)
+   ========================================================================== */
+/* Movie Backdrop Title on Dark Poster */
+html.light-mode .checkout-movie-title {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Sidebar Order Details */
+html.light-mode .checkout-detail-value {
+    color: #0f172a !important;
+}
+
+html.light-mode .checkout-seats-value {
+    color: #b45309 !important;
+    font-weight: 700 !important;
+}
+
+html.light-mode .checkout-total-label {
+    color: #475569 !important;
+}
+
+html.light-mode .checkout-email-value {
+    color: #0f172a !important;
+}
+
+/* VNPay Payment Method Title & Subtitle */
+html.light-mode .vnpay-method-title {
+    color: #0f172a !important;
+}
+
+html.light-mode .vnpay-method-sub {
+    color: #64748b !important;
+}
+
+/* VNPay Status Badge */
+html.light-mode .vnpay-status-badge {
+    background-color: #dcfce7 !important;
+    border-color: #86efac !important;
+    color: #15803d !important;
+}
+
+/* VNPay Sandbox Test Guide Box */
+html.light-mode .vnpay-guide-box {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #334155 !important;
+}
+
+html.light-mode .vnpay-guide-title {
+    color: #b45309 !important;
+}
+
+html.light-mode .vnpay-guide-note {
+    color: #64748b !important;
+}
+
+html.light-mode .vnpay-guide-grid {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    color: #475569 !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light-mode .vnpay-grid-value {
+    color: #0f172a !important;
+}
+
+html.light-mode .vnpay-grid-otp {
+    color: #b45309 !important;
+}
+
+html.light-mode .vnpay-grid-status {
+    color: #16a34a !important;
+}
+
+/* ==========================================================================
+   SEAT SELECTION PAGE (Screenshot 4 Fix)
+   ========================================================================== */
+/* Cinema Screen Banner */
+html.light-mode .seat-screen-beam {
+    background: linear-gradient(to right, transparent, rgba(148, 163, 184, 0.8), transparent) !important;
+    box-shadow: 0 -6px 20px rgba(148, 163, 184, 0.5) !important;
+}
+
+html.light-mode .seat-screen-glow {
+    background: linear-gradient(to bottom, rgba(226, 232, 240, 0.9), transparent) !important;
+}
+
+html.light-mode .seat-screen-text {
+    color: #334155 !important;
+    font-weight: 800 !important;
+}
+
+/* Standard Seats in Grid */
+html.light-mode .seat-standard {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #1e293b !important;
+}
+
+html.light-mode .seat-standard:hover {
+    background-color: #e2e8f0 !important;
+    border-color: #94a3b8 !important;
+}
+
+/* Booked Seats in Grid */
+html.light-mode .seat-booked {
+    background-color: #e2e8f0 !important;
+    border-color: #cbd5e1 !important;
+    color: #94a3b8 !important;
+}
+
+/* Seat Legend Items */
+html.light-mode .legend-box-standard {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+}
+
+html.light-mode .legend-text-standard {
+    color: #475569 !important;
+    font-weight: 500 !important;
+}
+
+html.light-mode .legend-text-vip {
+    color: #be123c !important;
+    font-weight: 600 !important;
+}
+
+html.light-mode .legend-text-sweetbox {
+    color: #0284c7 !important;
+    font-weight: 600 !important;
+}
+
+html.light-mode .legend-text-deluxe {
+    color: #b45309 !important;
+    font-weight: 600 !important;
+}
+
+html.light-mode .legend-text-selected {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+html.light-mode .legend-box-booked {
+    background-color: #e2e8f0 !important;
+    border-color: #cbd5e1 !important;
+}
+
+html.light-mode .legend-text-booked {
+    color: #64748b !important;
+}
+
+/* Seat Summary Sidebar */
+html.light-mode .seat-summary-selected {
+    color: #0f172a !important;
+}
+
+/* ==========================================================================
+   FOOD SELECTION PAGE (Additional Polish)
+   ========================================================================== */
+html.light-mode .food-stepper {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+}
+
+html.light-mode .food-stepper-btn {
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+html.light-mode .food-stepper-btn:hover {
+    background-color: #e2e8f0 !important;
+}
+
+html.light-mode .food-stepper-input {
+    color: #0f172a !important;
+}
+
+html.light-mode .food-ticket-price {
+    color: #0f172a !important;
+}
+
+html.light-mode .food-summary-list {
+    color: #334155 !important;
+}
+
+/* ==========================================================================
+   MOVIE DETAIL & ACTOR MODAL (Screenshot 5 Fix)
+   ========================================================================== */
+/* Actor Detail Modal Backdrop & Container */
+html.light-mode #actor-modal {
+    background-color: rgba(15, 23, 42, 0.65) !important;
+}
+
+html.light-mode .actor-modal-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+html.light-mode .actor-modal-left {
+    background-color: #000000 !important;
+    border-right: 1px solid #e2e8f0 !important;
+}
+
+/* Remove milky white overlay so actor photo is 100% crisp and true to life */
+html.light-mode .actor-modal-gradient {
+    display: none !important;
+}
+
+#modal-actor-avatar {
+    opacity: 1 !important;
+}
+
+html.light-mode #modal-actor-avatar {
+    opacity: 1 !important;
+    filter: contrast(1.04) saturate(1.03) !important;
+}
+
+html.light-mode .actor-modal-right {
+    background-color: #ffffff !important;
+}
+
+html.light-mode #close-actor-modal {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #334155 !important;
+}
+
+html.light-mode #close-actor-modal:hover {
+    background-color: #fee2e2 !important;
+    border-color: #fca5a5 !important;
+    color: #dc2626 !important;
+}
+
+html.light-mode .actor-modal-name {
+    color: #0f172a !important;
+}
+
+html.light-mode .actor-role-badge {
+    background-color: #fef3c7 !important;
+    border-color: #fde68a !important;
+}
+
+html.light-mode .actor-role-label {
+    color: #78350f !important;
+}
+
+html.light-mode .actor-role-value {
+    color: #b45309 !important;
+    font-weight: 700 !important;
+}
+
+html.light-mode .actor-bio-heading {
+    color: #475569 !important;
+}
+
+html.light-mode .actor-bio-text {
+    color: #334155 !important;
+}
+
+/* Actor Grid Cards in Movie Page */
+html.light-mode .actor-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light-mode .actor-card:hover {
+    border-color: #d4af37 !important;
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15) !important;
+}
+
+html.light-mode .actor-card h4 {
+    color: #0f172a !important;
+}
+
+html.light-mode .actor-card p {
+    color: #64748b !important;
+}
+
+html.light-mode .actor-card button {
+    background-color: #fef9c3 !important;
+    border-color: #fef08a !important;
+    color: #854d0e !important;
+}
+
+html.light-mode .actor-card button:hover {
+    background-color: #d4af37 !important;
+    color: #000000 !important;
+}
+
+/* Movie Additional Info Box */
+html.light-mode .movie-additional-info {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light-mode .movie-additional-info h4 {
+    color: #64748b !important;
+}
+
+html.light-mode .movie-additional-info p {
+    color: #0f172a !important;
+}
+
+/* ==========================================================================
+   CARDS & CONTAINERS IN LIGHT MODE
+   ========================================================================== */
+html.light-mode .bg-white\/5,
+html.light-mode .bg-white\/10,
+html.light-mode .bg-\[\#131722\],
+html.light-mode .bg-\[\#141416\],
+html.light-mode .bg-\[\#161922\],
+html.light-mode .bg-\[\#18181b\],
+html.light-mode .bg-\[\#1c2130\] {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+    color: #0f172a !important;
+}
+
+html.light-mode .bg-white\/5:hover,
+html.light-mode .bg-white\/10:hover {
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Movie Cards */
+html.light-mode .group .relative.aspect-\[2\/3\] {
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light-mode .group .relative.aspect-\[2\/3\]:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important;
+}
+
+html.light-mode .group h3 {
+    color: #0f172a !important;
+}
+
+/* Page Header Title Banners */
+html.light-mode .relative.border-b.border-white\/10 h1 {
+    color: #0f172a !important;
+}
+
+html.light-mode .relative.border-b.border-white\/10 p {
+    color: #64748b !important;
+}
+
+/* Cinema & Showtimes Containers */
+html.light-mode .cinema-scroll-list {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+
+html.light-mode .cinema-scroll-list::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+/* Form Controls & Inputs */
+html.light-mode input[type="text"],
+html.light-mode input[type="email"],
+html.light-mode input[type="password"],
+html.light-mode select {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+}
+
+/* Footer in Light Mode */
+html.light-mode footer {
+    background-color: #ffffff !important;
+    border-top: 1px solid #e2e8f0 !important;
+    color: #64748b !important;
+}
+
+html.light-mode footer h3 {
+    color: #0f172a !important;
+}
+
+html.light-mode footer a {
+    color: #64748b !important;
+}
+
+html.light-mode footer a:hover {
+    color: #e50914 !important;
+}
+
+html.light-mode footer .border-b {
+    border-color: #f1f5f9 !important;
+}
+
+html.light-mode footer span.text-gray-300,
+html.light-mode footer span.text-gray-500 {
+    color: #64748b !important;
+}
