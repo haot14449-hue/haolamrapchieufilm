@@ -24,11 +24,22 @@ class ShowtimeController extends Controller
             $query->where('movie_id', $request->movie_id);
         }
 
+        $timeStatus = $request->input('time_status', 'all');
+        if ($timeStatus === 'upcoming') {
+            $query->where('start_time', '>=', now());
+        } elseif ($timeStatus === 'past') {
+            $query->where('start_time', '<', now());
+        }
+
         $showtimes = $query->get();
         $cinemas = Cinema::with('rooms')->get();
         $movies = Movie::orderBy('title')->get();
 
-        return view('admin.showtimes.index', compact('showtimes', 'cinemas', 'movies'));
+        $upcomingCount = Showtime::where('start_time', '>=', now())->count();
+        $pastCount = Showtime::where('start_time', '<', now())->count();
+        $totalCount = Showtime::count();
+
+        return view('admin.showtimes.index', compact('showtimes', 'cinemas', 'movies', 'timeStatus', 'upcomingCount', 'pastCount', 'totalCount'));
     }
 
     public function create()

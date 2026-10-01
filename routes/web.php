@@ -8,6 +8,28 @@ use App\Http\Controllers\CinemaController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\SepayController;
+use App\Http\Controllers\PageController;
+
+// SePay Webhook Endpoint (Called by SePay when receiving money into MB Bank)
+Route::post('/api/sepay/webhook', [SepayController::class, 'webhook'])->name('sepay.webhook');
+Route::post('/sepay/webhook', [SepayController::class, 'webhook']);
+
+// Thông tin HCTV Việt Nam
+Route::get('/gioi-thieu', [PageController::class, 'about'])->name('pages.about');
+Route::get('/tien-ich-online', [PageController::class, 'onlineServices'])->name('pages.online_services');
+Route::get('/the-qua-tang', [PageController::class, 'giftCards'])->name('pages.gift_cards');
+Route::get('/tuyen-dung', [PageController::class, 'careers'])->name('pages.careers');
+Route::get('/lien-he-quang-cao', [PageController::class, 'advertising'])->name('pages.advertising');
+Route::get('/danh-cho-doi-tac', [PageController::class, 'partners'])->name('pages.partners');
+
+// Điều khoản sử dụng & Quy định
+Route::get('/dieu-khoan-chung', [PageController::class, 'terms'])->name('pages.terms');
+Route::get('/dieu-khoan-giao-dich', [PageController::class, 'termsTransaction'])->name('pages.terms_transaction');
+Route::get('/chinh-sach-thanh-toan', [PageController::class, 'paymentPolicy'])->name('pages.payment_policy');
+Route::get('/chinh-sach-bao-mat', [PageController::class, 'privacyPolicy'])->name('pages.privacy_policy');
+Route::get('/quy-dinh-rap-phim', [PageController::class, 'cinemaRules'])->name('pages.cinema_rules');
+Route::get('/cau-hoi-thuong-gap', [PageController::class, 'faq'])->name('pages.faq');
 
 // 01. Trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -40,22 +62,35 @@ Route::middleware('auth')->group(function () {
     // 09. Thanh toán
     Route::get('/booking/checkout/{booking_id}', [BookingController::class, 'checkout'])->name('booking.checkout');
     Route::post('/booking/checkout/{booking_id}', [BookingController::class, 'processPayment'])->name('booking.process_payment');
+    Route::post('/booking/checkout/{booking_id}/apply-points', [BookingController::class, 'applyPoints'])->name('booking.apply_points');
+    Route::post('/booking/checkout/{booking_id}/remove-points', [BookingController::class, 'removePoints'])->name('booking.remove_points');
+    Route::post('/booking/checkout/{booking_id}/apply-voucher', [BookingController::class, 'applyVoucher'])->name('booking.apply_voucher');
+    Route::post('/booking/checkout/{booking_id}/remove-voucher', [BookingController::class, 'removeVoucher'])->name('booking.remove_voucher');
+    Route::get('/booking/pay-qr/{booking_id}', [BookingController::class, 'payQr'])->name('booking.pay_qr');
+    Route::get('/booking/check-status/{booking_id}', [BookingController::class, 'checkStatus'])->name('booking.check_status');
+    Route::post('/booking/simulate-qr-paid/{booking_id}', [BookingController::class, 'simulateQrPaid'])->name('booking.simulate_qr_paid');
     Route::get('/booking/vnpay-sandbox/{booking_id}', [BookingController::class, 'vnpaySandboxGateway'])->name('booking.vnpay_sandbox');
     Route::get('/booking/vnpay-return', [BookingController::class, 'vnpayReturn'])->name('booking.vnpay_return');
     
     // 10. Đặt vé thành công
     Route::get('/booking/success/{booking_id}', [BookingController::class, 'success'])->name('booking.success');
 
-    // 11. Tài khoản cá nhân
+    // 11. Tài khoản cá nhân & Ví voucher
     Route::get('/account/tickets', [AccountController::class, 'tickets'])->name('account.tickets');
+    Route::get('/account/vouchers', [AccountController::class, 'vouchers'])->name('account.vouchers');
+    Route::post('/account/vouchers/save', [AccountController::class, 'saveVoucher'])->name('account.vouchers.save');
+    Route::delete('/account/vouchers/{id}', [AccountController::class, 'removeVoucher'])->name('account.vouchers.remove');
 
     // Mặc định login redirect to dashboard -> đổi sang home
     Route::get('/dashboard', function () {
         return redirect()->route('home');
     })->name('dashboard');
 
+    // Profile & Password Management
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/password/send-otp', [ProfileController::class, 'sendPasswordOtp'])->name('profile.password.send_otp');
+    Route::post('/profile/password/update-with-otp', [ProfileController::class, 'updatePasswordWithOtp'])->name('profile.password.update_otp');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

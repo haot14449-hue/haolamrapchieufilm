@@ -12,11 +12,11 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
                 </svg>
             </div>
-            <h2 class="text-3xl font-serif font-bold text-white mb-2">Thanh Toán Thành Công!</h2>
-            <p class="text-gray-400">Cảm ơn bạn đã lựa chọn HCTV Cinema. Dưới đây là vé điện tử của bạn.</p>
+            <h2 class="success-title text-3xl font-serif font-bold text-white mb-2">Thanh Toán Thành Công!</h2>
+            <p class="success-desc text-gray-400">Cảm ơn bạn đã lựa chọn HCTV Cinema. Dưới đây là vé điện tử của bạn.</p>
 
             <!-- Gmail Alert Box -->
-            <div class="mt-4 inline-flex items-center gap-2 bg-green-500/10 border border-green-500/40 text-green-300 px-5 py-2.5 rounded-full text-sm font-medium shadow-md">
+            <div class="success-email-alert mt-4 inline-flex items-center gap-2 bg-green-500/10 border border-green-500/40 text-green-300 px-5 py-2.5 rounded-full text-sm font-medium shadow-md">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
@@ -123,7 +123,7 @@
         </div>
         
         <div class="mt-10 flex flex-wrap justify-center gap-4">
-            <a href="{{ route('home') }}" class="px-8 py-3 border border-white/20 text-white rounded-xl hover:bg-white/10 transition-colors font-medium">
+            <a href="{{ route('home') }}" class="btn-home-link px-8 py-3 border border-white/20 text-white rounded-xl hover:bg-white/10 transition-colors font-medium">
                 Về Trang Chủ
             </a>
             <a href="{{ route('account.tickets') }}" class="px-8 py-3 bg-cinematic-red text-white font-bold rounded-xl shadow-[0_0_15px_rgba(229,9,20,0.4)] hover:bg-red-700 transition-colors">

@@ -119,48 +119,66 @@
                         @endif
                         <!-- User Dropdown Menu -->
                         <div class="relative group">
-                            <!-- Dropdown Trigger (User Icon) -->
-                            <button type="button" class="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 focus:outline-none focus:ring-2 focus:ring-cinematic-gold transition-all duration-300">
-                                <svg class="w-5 h-5 text-gray-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                            <!-- Dropdown Trigger (User Icon or Avatar) -->
+                            <button type="button" class="flex items-center justify-center w-9 h-9 rounded-full overflow-hidden bg-white/10 hover:bg-white/20 border border-white/20 focus:outline-none focus:ring-2 focus:ring-cinematic-gold transition-all duration-300">
+                                @if(!empty(auth()->user()->avatar_url))
+                                    <img src="{{ auth()->user()->avatar_url }}" alt="{{ auth()->user()->name }}" class="w-full h-full object-cover">
+                                @else
+                                    <svg class="w-5 h-5 text-gray-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                @endif
                             </button>
                             
                             <!-- Dropdown Content -->
-                            <div class="absolute right-0 mt-2 w-56 bg-[#18181b]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.8)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform origin-top-right scale-95 group-hover:scale-100 overflow-hidden before:absolute before:-top-3 before:right-0 before:w-16 before:h-4 before:bg-transparent">
+                            <div class="user-dropdown-menu absolute right-0 mt-2 w-60 bg-[#18181b]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.8)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform origin-top-right scale-95 group-hover:scale-100 overflow-hidden before:absolute before:-top-3 before:right-0 before:w-16 before:h-4 before:bg-transparent">
                                 <!-- User Info Header -->
-                                <div class="px-4 py-3 border-b border-white/10 flex items-center gap-3">
-                                    <!-- Using first letter of name as avatar -->
-                                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cinematic-gold to-yellow-600 flex items-center justify-center shrink-0 shadow-inner">
-                                        <span class="text-white font-bold text-sm">{{ mb_substr(auth()->user()->name, 0, 1) }}</span>
-                                    </div>
+                                <div class="user-dropdown-header px-4 py-3 border-b border-white/10 flex items-center gap-3">
+                                    @if(!empty(auth()->user()->avatar_url))
+                                        <img src="{{ auth()->user()->avatar_url }}" alt="{{ auth()->user()->name }}" class="w-10 h-10 rounded-full object-cover shrink-0 border border-cinematic-red shadow">
+                                    @else
+                                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cinematic-gold to-yellow-600 flex items-center justify-center shrink-0 shadow-inner">
+                                            <span class="text-white font-bold text-sm">{{ mb_substr(auth()->user()->name, 0, 1) }}</span>
+                                        </div>
+                                    @endif
                                     <div class="min-w-0">
-                                        <p class="text-sm font-bold text-white truncate">{{ auth()->user()->name }}</p>
-                                        <p class="text-xs text-gray-400 truncate">{{ auth()->user()->email }}</p>
+                                        <p class="user-dropdown-name text-sm font-bold text-white truncate">{{ auth()->user()->name }}</p>
+                                        <p class="user-dropdown-points text-xs text-cinematic-gold font-semibold flex items-center gap-1">💎 {{ number_format(auth()->user()->points) }} Điểm</p>
                                     </div>
                                 </div>
                                 
                                 <!-- Menu Links -->
                                 <div class="py-2">
-                                    <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors group/item">
-                                        <svg class="w-4 h-4 text-gray-400 group-hover/item:text-cinematic-gold transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                        Hồ sơ cá nhân
+                                    <a href="{{ route('profile.edit') }}" class="user-dropdown-item flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors group/item">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover/item:text-cinematic-gold transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        <span>Hồ sơ cá nhân</span>
                                     </a>
-                                    <a href="{{ route('account.tickets') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors group/item">
-                                        <svg class="w-4 h-4 text-gray-400 group-hover/item:text-cinematic-gold transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
-                                        Lịch sử đặt vé
+                                    <a href="{{ route('account.tickets') }}" class="user-dropdown-item flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors group/item">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover/item:text-cinematic-gold transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
+                                        <span>Lịch sử đặt vé</span>
                                     </a>
-                                    <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors group/item">
-                                        <svg class="w-4 h-4 text-gray-400 group-hover/item:text-cinematic-gold transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                                        Thanh toán
+                                    <a href="{{ route('account.vouchers') }}" class="user-dropdown-item flex items-center justify-between px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors group/item">
+                                        <div class="flex items-center gap-3">
+                                            <svg class="w-4 h-4 text-gray-400 group-hover/item:text-cinematic-gold transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                            </svg>
+                                            <span>Ví voucher</span>
+                                        </div>
+                                        <span class="user-dropdown-voucher-badge px-2 py-0.5 text-[10px] font-bold bg-cinematic-gold/20 text-cinematic-gold border border-cinematic-gold/40 rounded-full">
+                                            {{ auth()->user()->activeVouchersCount() > 0 ? auth()->user()->activeVouchersCount() : 'Ưu đãi' }}
+                                        </span>
+                                    </a>
+                                    <a href="{{ route('profile.edit') }}#pointsSection" class="user-dropdown-item flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors group/item">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover/item:text-cinematic-gold transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        <span>Điểm thưởng & Ưu đãi</span>
                                     </a>
                                 </div>
                                 
                                 <!-- Logout Action -->
-                                <div class="border-t border-white/10 py-1.5 bg-black/20">
+                                <div class="user-dropdown-footer border-t border-white/10 py-1.5 bg-black/20">
                                     <form method="POST" action="{{ route('logout') }}" class="m-0">
                                         @csrf
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="flex items-center gap-3 px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-colors group/item w-full text-left">
                                              <svg class="w-4 h-4 text-red-500/80 group-hover/item:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                                            Đăng xuất
+                                            <span>Đăng xuất</span>
                                         </a>
                                     </form>
                                 </div>
@@ -185,6 +203,16 @@
                 <a href="{{ route('showtimes') }}" class="block text-sm font-bold tracking-wider hover:text-cinematic-gold transition {{ request()->routeIs('showtimes') ? 'text-cinematic-gold' : 'text-gray-200' }}">LỊCH CHIẾU</a>
                 <a href="{{ route('cinemas.index') }}" class="block text-sm font-bold tracking-wider hover:text-cinematic-gold transition {{ request()->routeIs('cinemas.*') ? 'text-cinematic-gold' : 'text-gray-200' }}">RẠP PHIM</a>
                 <a href="{{ route('promotions.index') }}" class="block text-sm font-bold tracking-wider hover:text-cinematic-gold transition {{ request()->routeIs('promotions.*') ? 'text-cinematic-gold' : 'text-gray-200' }}">KHUYẾN MÃI</a>
+                @auth
+                <div class="pt-2 border-t border-white/10 space-y-2">
+                    <a href="{{ route('account.vouchers') }}" class="flex items-center justify-between text-sm font-bold tracking-wider hover:text-cinematic-gold transition {{ request()->routeIs('account.vouchers') ? 'text-cinematic-gold' : 'text-gray-200' }}">
+                        <span>🎟️ VÍ VOUCHER CỦA TÔI</span>
+                        <span class="px-2 py-0.5 text-[10px] bg-cinematic-gold/20 text-cinematic-gold border border-cinematic-gold/40 rounded-full">{{ auth()->user()->activeVouchersCount() }}</span>
+                    </a>
+                    <a href="{{ route('account.tickets') }}" class="block text-sm font-bold tracking-wider hover:text-cinematic-gold transition {{ request()->routeIs('account.tickets') ? 'text-cinematic-gold' : 'text-gray-200' }}">🎟️ VÉ CỦA TÔI</a>
+                    <a href="{{ route('profile.edit') }}" class="block text-sm font-bold tracking-wider hover:text-cinematic-gold transition {{ request()->routeIs('profile.edit') ? 'text-cinematic-gold' : 'text-gray-200' }}">👤 HỒ SƠ CÁ NHÂN</a>
+                </div>
+                @endauth
                 <div class="pt-3 border-t border-white/10 flex items-center justify-between">
                     <span class="text-xs font-semibold text-gray-400">Giao diện</span>
                     <button type="button" id="mobile-theme-toggle" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-medium text-white transition">
@@ -200,19 +228,19 @@
             @yield('content')
         </main>
 
-        <footer class="bg-black/90 border-t border-white/10 mt-20 text-sm text-gray-400 font-sans">
+        <footer class="site-footer bg-[#0c1322] border-t-2 border-cinematic-red mt-20 text-sm text-slate-300 font-sans shadow-2xl">
             <!-- Brand Line -->
-            <div class="border-b border-white/10 py-4 overflow-x-auto">
-                <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-4 md:gap-6 text-gray-500 font-bold text-xs md:text-sm tracking-widest uppercase whitespace-nowrap">
-                    <span class="hover:text-white cursor-pointer transition text-gray-300">4DX</span>
-                    <span class="hover:text-white cursor-pointer transition text-blue-500">IMAX</span>
-                    <span class="hover:text-white cursor-pointer transition text-yellow-500">STARIUM</span>
-                    <span class="hover:text-white cursor-pointer transition text-yellow-600">GOLD CLASS</span>
-                    <span class="hover:text-white cursor-pointer transition text-gray-300">L'AMOUR</span>
-                    <span class="hover:text-white cursor-pointer transition text-pink-500">SWEETBOX</span>
+            <div class="footer-brand-bar bg-[#060a12] border-b border-white/10 py-4 overflow-x-auto">
+                <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-4 md:gap-7 font-bold text-xs md:text-sm tracking-widest uppercase whitespace-nowrap">
+                    <span class="hover:text-white cursor-pointer transition text-slate-200">4DX</span>
+                    <span class="hover:text-white cursor-pointer transition text-sky-400">IMAX</span>
+                    <span class="hover:text-white cursor-pointer transition text-amber-400">STARIUM</span>
+                    <span class="hover:text-white cursor-pointer transition text-yellow-500">GOLD CLASS</span>
+                    <span class="hover:text-white cursor-pointer transition text-rose-300">L'AMOUR</span>
+                    <span class="hover:text-white cursor-pointer transition text-pink-400">SWEETBOX</span>
                     <span class="hover:text-white cursor-pointer transition text-red-500">PREMIUM CINEMA</span>
-                    <span class="hover:text-white cursor-pointer transition text-gray-300">SCREENX</span>
-                    <span class="hover:text-white cursor-pointer transition text-green-600">CINE & FORÊT</span>
+                    <span class="hover:text-white cursor-pointer transition text-slate-200">SCREENX</span>
+                    <span class="hover:text-white cursor-pointer transition text-emerald-400">CINE & FORÊT</span>
                     <span class="hover:text-white cursor-pointer transition text-purple-400">CINE SUITE</span>
                 </div>
             </div>
@@ -220,73 +248,81 @@
             <!-- 4 Columns -->
             <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="font-bold text-white mb-4 text-base">HCTV Việt Nam</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-white transition">Giới Thiệu</a></li>
-                        <li><a href="#" class="hover:text-white transition">Tiện Ích Online</a></li>
-                        <li><a href="#" class="hover:text-white transition">Thẻ Quà Tặng</a></li>
-                        <li><a href="#" class="hover:text-white transition">Tuyển Dụng</a></li>
-                        <li><a href="#" class="hover:text-white transition">Liên Hệ Quảng Cáo HCTV</a></li>
-                        <li><a href="#" class="hover:text-white transition">Dành cho đối tác</a></li>
+                    <h3 class="font-bold text-white mb-4 text-base tracking-wide flex items-center gap-2">
+                        <span class="w-1.5 h-4 bg-cinematic-red rounded-full"></span> HCTV Việt Nam
+                    </h3>
+                    <ul class="space-y-2 text-slate-300">
+                        <li><a href="{{ route('pages.about') }}" class="hover:text-cinematic-red hover:translate-x-1 inline-block transition">Giới Thiệu</a></li>
+                        <li><a href="{{ route('pages.online_services') }}" class="hover:text-cinematic-red hover:translate-x-1 inline-block transition">Tiện Ích Online</a></li>
+                        <li><a href="{{ route('pages.gift_cards') }}" class="hover:text-cinematic-red hover:translate-x-1 inline-block transition">Thẻ Quà Tặng</a></li>
+                        <li><a href="{{ route('pages.careers') }}" class="hover:text-cinematic-red hover:translate-x-1 inline-block transition">Tuyển Dụng</a></li>
+                        <li><a href="{{ route('pages.advertising') }}" class="hover:text-cinematic-red hover:translate-x-1 inline-block transition">Liên Hệ Quảng Cáo HCTV</a></li>
+                        <li><a href="{{ route('pages.partners') }}" class="hover:text-cinematic-red hover:translate-x-1 inline-block transition">Dành cho đối tác</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="font-bold text-white mb-4 text-base">Điều khoản sử dụng</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-white transition">Điều Khoản Chung</a></li>
-                        <li><a href="#" class="hover:text-white transition">Điều Khoản Giao Dịch</a></li>
-                        <li><a href="#" class="hover:text-white transition">Chính Sách Thanh Toán</a></li>
-                        <li><a href="#" class="hover:text-white transition">Chính Sách Bảo Mật</a></li>
-                        <li><a href="#" class="hover:text-white transition">Những Quy Định Tại Rạp Phim</a></li>
-                        <li><a href="#" class="hover:text-white transition">Câu Hỏi Thường Gặp</a></li>
+                    <h3 class="font-bold text-white mb-4 text-base tracking-wide flex items-center gap-2">
+                        <span class="w-1.5 h-4 bg-cinematic-red rounded-full"></span> Điều khoản sử dụng
+                    </h3>
+                    <ul class="space-y-2 text-slate-300">
+                        <li><a href="{{ route('pages.terms') }}" class="hover:text-cinematic-red hover:translate-x-1 inline-block transition">Điều Khoản Chung</a></li>
+                        <li><a href="{{ route('pages.terms_transaction') }}" class="hover:text-cinematic-red hover:translate-x-1 inline-block transition">Điều Khoản Giao Dịch</a></li>
+                        <li><a href="{{ route('pages.payment_policy') }}" class="hover:text-cinematic-red hover:translate-x-1 inline-block transition">Chính Sách Thanh Toán</a></li>
+                        <li><a href="{{ route('pages.privacy_policy') }}" class="hover:text-cinematic-red hover:translate-x-1 inline-block transition">Chính Sách Bảo Mật</a></li>
+                        <li><a href="{{ route('pages.cinema_rules') }}" class="hover:text-cinematic-red hover:translate-x-1 inline-block transition">Những Quy Định Tại Rạp Phim</a></li>
+                        <li><a href="{{ route('pages.faq') }}" class="hover:text-cinematic-red hover:translate-x-1 inline-block transition">Câu Hỏi Thường Gặp</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="font-bold text-white mb-4 text-base">Kết nối với chúng tôi</h3>
+                    <h3 class="font-bold text-white mb-4 text-base tracking-wide flex items-center gap-2">
+                        <span class="w-1.5 h-4 bg-cinematic-red rounded-full"></span> Kết nối với chúng tôi
+                    </h3>
                     <div class="flex gap-4 mb-6">
                         <!-- Facebook -->
-                        <a href="#" class="w-10 h-10 bg-blue-600 text-white rounded flex items-center justify-center hover:opacity-80 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/></svg></a>
+                        <a href="#" class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center hover:opacity-90 hover:scale-105 transition shadow"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/></svg></a>
                         <!-- Youtube -->
-                        <a href="#" class="w-10 h-10 bg-red-600 text-white rounded flex items-center justify-center hover:opacity-80 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582 6.186a2.665 2.665 0 00-1.875-1.881C18.053 3.86 12 3.86 12 3.86s-6.053 0-7.707.445A2.665 2.665 0 002.418 6.186C2 7.846 2 12 2 12s0 4.154.418 5.814a2.665 2.665 0 001.875 1.881C5.947 20.14 12 20.14 12 20.14s6.053 0 7.707-.445a2.665 2.665 0 001.875-1.881C22 16.154 22 12 22 12s0-4.154-.418-5.814zM9.99 15.402V8.598l6.565 3.402-6.565 3.402z"/></svg></a>
+                        <a href="#" class="w-10 h-10 bg-red-600 text-white rounded-lg flex items-center justify-center hover:opacity-90 hover:scale-105 transition shadow"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582 6.186a2.665 2.665 0 00-1.875-1.881C18.053 3.86 12 3.86 12 3.86s-6.053 0-7.707.445A2.665 2.665 0 002.418 6.186C2 7.846 2 12 2 12s0 4.154.418 5.814a2.665 2.665 0 001.875 1.881C5.947 20.14 12 20.14 12 20.14s6.053 0 7.707-.445a2.665 2.665 0 001.875-1.881C22 16.154 22 12 22 12s0-4.154-.418-5.814zM9.99 15.402V8.598l6.565 3.402-6.565 3.402z"/></svg></a>
                         <!-- Instagram -->
-                        <a href="#" class="w-10 h-10 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 text-white rounded flex items-center justify-center hover:opacity-80 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.203 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                        <a href="#" class="w-10 h-10 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 text-white rounded-lg flex items-center justify-center hover:opacity-90 hover:scale-105 transition shadow"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.203 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
                         <!-- Zalo (Text fallback) -->
-                        <a href="#" class="w-10 h-10 bg-blue-500 text-white rounded flex items-center justify-center font-bold text-[10px] hover:opacity-80 transition">Zalo</a>
+                        <a href="#" class="w-10 h-10 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold text-xs hover:opacity-90 hover:scale-105 transition shadow">Zalo</a>
                     </div>
                     <div>
                         <!-- BCT badge mockup -->
-                        <div class="inline-flex items-center gap-2 border border-blue-500 rounded p-1 opacity-80">
+                        <div class="inline-flex items-center gap-2 border border-blue-400/80 bg-blue-500/10 rounded-lg p-1.5">
                             <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-[8px] font-bold">BCT</div>
-                            <div class="text-blue-500 text-[10px] font-bold leading-tight">
+                            <div class="text-blue-300 text-[10px] font-bold leading-tight">
                                 ĐÃ THÔNG BÁO<br>BỘ CÔNG THƯƠNG
                             </div>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <h3 class="font-bold text-white mb-4 text-base">Chăm sóc khách hàng</h3>
-                    <div class="space-y-2">
-                        <p>Hotline: <strong class="text-white text-base">1900 6017</strong></p>
-                        <p>Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày bao gồm cả Lễ Tết)</p>
-                        <p>Email hỗ trợ: <a href="mailto:hoidap@hctv.vn" class="text-cinematic-red hover:underline">hoidap@hctv.vn</a></p>
+                    <h3 class="font-bold text-white mb-4 text-base tracking-wide flex items-center gap-2">
+                        <span class="w-1.5 h-4 bg-cinematic-red rounded-full"></span> Chăm sóc khách hàng
+                    </h3>
+                    <div class="space-y-2 text-slate-300">
+                        <p>Hotline: <strong class="footer-hotline text-cinematic-gold text-lg font-bold ml-1">1900 6017</strong></p>
+                        <p>Giờ làm việc: <span class="text-slate-200">8:00 - 22:00</span> (Tất cả các ngày bao gồm cả Lễ Tết)</p>
+                        <p>Email hỗ trợ: <a href="mailto:hoidap@hctv.vn" class="text-cinematic-red hover:underline font-medium">hoidap@hctv.vn</a></p>
                     </div>
                 </div>
             </div>
 
             <!-- Company Info -->
-            <div class="border-t border-white/10 py-8">
+            <div class="footer-divider border-t border-white/10 py-8">
                 <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-8 items-center md:items-start">
                     <div class="flex-shrink-0">
-                        <a href="{{ route('home') }}" class="text-4xl font-serif font-bold tracking-wider text-white">
+                        <a href="{{ route('home') }}" class="text-4xl font-serif font-bold tracking-wider footer-logo-main text-white drop-shadow">
                             HC<span class="text-cinematic-red">TV</span>
                         </a>
                     </div>
-                    <div class="text-center md:text-left">
-                        <h3 class="font-bold text-white mb-2 uppercase text-base">CÔNG TY TNHH HCTV VIỆT NAM</h3>
-                        <p>Giấy Chứng nhận đăng ký doanh nghiệp: 0303675393 đăng ký lần đầu ngày 31/7/2008, được cấp bởi Sở Kế hoạch và Đầu tư Thành phố Hồ Chí Minh</p>
-                        <p>Địa chỉ: Lầu 2, số 7/28, đường Thành Thái, phường Diên Hồng, Quận 10, Thành phố Hồ Chí Minh, Việt Nam</p>
-                        <p>Đường dây nóng (Hotline): 1900 6017</p>
-                        <p class="mt-2 text-xs opacity-70">COPYRIGHT 2026 HCTV VIETNAM CO., LTD. ALL RIGHTS RESERVED</p>
+                    <div class="text-center md:text-left text-slate-300 space-y-1">
+                        <h3 class="font-bold text-white mb-2 uppercase text-base tracking-wide">CÔNG TY TNHH HCTV VIỆT NAM</h3>
+                        <p class="footer-company-desc text-xs text-slate-300 leading-relaxed">Giấy Chứng nhận đăng ký doanh nghiệp: 0303675393 đăng ký lần đầu ngày 31/7/2008, được cấp bởi Sở Kế hoạch và Đầu tư Thành phố Hồ Chí Minh</p>
+                        <p class="footer-company-desc text-xs text-slate-300 leading-relaxed">Địa chỉ: Lầu 2, số 7/28, đường Thành Thái, phường Diên Hồng, Quận 10, Thành phố Hồ Chí Minh, Việt Nam</p>
+                        <p class="footer-company-desc text-xs text-slate-300 leading-relaxed">Đường dây nóng (Hotline): <span class="footer-hotline text-cinematic-gold font-semibold">1900 6017</span></p>
+                        <p class="mt-2 text-xs text-slate-400">COPYRIGHT 2026 HCTV VIETNAM CO., LTD. ALL RIGHTS RESERVED</p>
                     </div>
                 </div>
             </div>

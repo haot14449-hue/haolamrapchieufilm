@@ -168,12 +168,14 @@
 
             <!-- Bottom Text -->
             <div class="absolute bottom-3 left-3 right-3">
-                <h3 class="text-[15px] font-bold text-white tracking-wide truncate group-hover:text-amber-200 transition">
+                <h3 class="text-[15px] font-bold text-white tracking-wide truncate group-hover:text-amber-200 transition"
+                    style="color: #ffffff !important; text-shadow: 0 2px 6px rgba(0,0,0,0.95), 0 0 12px rgba(0,0,0,0.85); font-weight: 700;">
                     Tất cả thể loại
                 </h3>
-                <div class="text-[10px] font-extrabold tracking-widest text-white/90 group-hover:text-white uppercase flex items-center gap-1 mt-0.5">
+                <div class="text-[10px] font-extrabold tracking-widest text-white/90 group-hover:text-white uppercase flex items-center gap-1 mt-0.5 genre-cta"
+                     style="color: #f8fafc !important; text-shadow: 0 1px 4px rgba(0,0,0,0.9);">
                     <span>XEM NGAY</span>
-                    <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #ffffff !important;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
                     </svg>
                 </div>
@@ -213,14 +215,15 @@
                     </svg>
                 </div>
 
-                <!-- Bottom Text -->
                 <div class="absolute bottom-3 left-3 right-3">
-                    <h3 class="text-[15px] font-bold text-white tracking-wide truncate group-hover:text-amber-200 transition">
+                    <h3 class="text-[15px] font-bold text-white tracking-wide truncate group-hover:text-amber-200 transition" 
+                        style="color: #ffffff !important; text-shadow: 0 2px 6px rgba(0,0,0,0.95), 0 0 12px rgba(0,0,0,0.85); font-weight: 700;">
                         {{ $g->name }}
                     </h3>
-                    <div class="text-[10px] font-extrabold tracking-widest text-white/90 group-hover:text-white uppercase flex items-center gap-1 mt-0.5">
+                    <div class="text-[10px] font-extrabold tracking-widest text-white/90 group-hover:text-white uppercase flex items-center gap-1 mt-0.5 genre-cta"
+                         style="color: #f8fafc !important; text-shadow: 0 1px 4px rgba(0,0,0,0.9);">
                         <span>XEM NGAY</span>
-                        <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #ffffff !important;">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
                         </svg>
                     </div>
@@ -234,7 +237,7 @@
         <!-- Left Arrow Button -->
         <button type="button" 
                 id="{{ $prefix }}-scroll-left" 
-                class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/25 text-gray-400 hover:text-white flex items-center justify-center transition shrink-0 cursor-pointer focus:outline-none"
+                class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/25 text-gray-400 hover:text-white flex items-center justify-center transition shrink-0 cursor-pointer focus:outline-none genre-scroll-btn"
                 aria-label="Cuộn sang trái">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
@@ -243,16 +246,16 @@
 
         <!-- Progress Track -->
         <div id="{{ $prefix }}-scroll-track" 
-             class="flex-1 h-1.5 bg-white/10 rounded-full relative overflow-hidden cursor-pointer">
+             class="flex-1 h-1.5 bg-white/10 rounded-full relative overflow-hidden cursor-pointer genre-scroll-track">
             <div id="{{ $prefix }}-scroll-thumb" 
-                 class="h-full bg-white/40 hover:bg-white/70 rounded-full transition-all duration-150 absolute top-0 left-0"
+                 class="h-full bg-white/40 hover:bg-white/70 rounded-full transition-all duration-150 absolute top-0 left-0 genre-scroll-thumb"
                  style="width: 25%; transform: translateX(0%);"></div>
         </div>
 
         <!-- Right Arrow Button -->
         <button type="button" 
                 id="{{ $prefix }}-scroll-right" 
-                class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/25 text-gray-400 hover:text-white flex items-center justify-center transition shrink-0 cursor-pointer focus:outline-none"
+                class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/25 text-gray-400 hover:text-white flex items-center justify-center transition shrink-0 cursor-pointer focus:outline-none genre-scroll-btn"
                 aria-label="Cuộn sang phải">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
@@ -264,6 +267,41 @@
 <style>
     #{{ $prefix }}-genre-container::-webkit-scrollbar {
         display: none;
+    }
+
+    /* Đảm bảo chữ trong card thể loại luôn sáng và nổi bật trên nền ảnh */
+    .genre-card-item,
+    .genre-card-item h3,
+    .genre-card-item div,
+    .genre-card-item span,
+    .genre-card-item svg {
+        color: #ffffff !important;
+    }
+    .genre-card-item h3 {
+        color: #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95), 0 0 12px rgba(0, 0, 0, 0.85) !important;
+        font-weight: 700 !important;
+    }
+    .genre-card-item:hover h3 {
+        color: #fef08a !important;
+    }
+    .genre-card-item .genre-cta {
+        color: #f8fafc !important;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+    }
+    html.light-mode .genre-scroll-btn {
+        background-color: #e2e8f0 !important;
+        color: #475569 !important;
+    }
+    html.light-mode .genre-scroll-btn:hover {
+        background-color: #cbd5e1 !important;
+        color: #0f172a !important;
+    }
+    html.light-mode .genre-scroll-track {
+        background-color: #e2e8f0 !important;
+    }
+    html.light-mode .genre-scroll-thumb {
+        background-color: #94a3b8 !important;
     }
 </style>
 

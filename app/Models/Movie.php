@@ -25,9 +25,24 @@ class Movie extends Model
         return $this->hasMany(Showtime::class);
     }
 
+    /**
+     * Relationship to upcoming showtimes that have not yet started.
+     */
+    public function upcomingShowtimes()
+    {
+        return $this->hasMany(Showtime::class)
+                    ->where('start_time', '>=', now())
+                    ->orderBy('start_time', 'asc');
+    }
+
     public function actors()
     {
         return $this->hasMany(MovieActor::class)->orderBy('order', 'asc');
+    }
+
+    public function topHot()
+    {
+        return $this->hasOne(TopHotMovie::class);
     }
 
     public function getPosterUrlAttribute($value)

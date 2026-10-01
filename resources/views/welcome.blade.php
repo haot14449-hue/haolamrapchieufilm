@@ -32,13 +32,13 @@
     <div class="swiper heroSwiper w-full h-screen">
         <div class="swiper-wrapper">
             @foreach($movies->take(5) as $movie)
-            <div class="swiper-slide relative h-screen w-full overflow-hidden">
+            <div class="swiper-slide relative h-screen w-full overflow-hidden hero-slide">
                 <!-- Backdrop Image -->
-                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ $movie->backdrop_url }}');" data-swiper-parallax="-23%"></div>
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-backdrop-img" style="background-image: url('{{ $movie->backdrop_url }}');" data-swiper-parallax="-23%"></div>
                 
                 <!-- Gradient Overlays -->
-                <div class="absolute inset-0 bg-black/40"></div>
-                <div class="absolute inset-0 bg-cinematic-gradient"></div>
+                <div class="absolute inset-0 hero-dark-overlay pointer-events-none"></div>
+                <div class="absolute inset-0 hero-gradient-overlay pointer-events-none"></div>
                 
                 <!-- Content -->
                 <div class="relative z-10 h-full flex flex-col justify-end pb-32 px-6 md:px-16 max-w-7xl mx-auto">

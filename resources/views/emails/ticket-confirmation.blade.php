@@ -149,12 +149,20 @@
                                                 <td>
                                                     <span style="font-size: 12px; color: #94a3b8; display: block;">Phương thức:</span>
                                                     <span style="font-size: 14px; font-weight: 700; color: #38bdf8;">{{ $booking->payment_method ?? 'VNPAY' }}</span>
+                                                    @if(($booking->points_used ?? 0) > 0)
+                                                    <div style="font-size: 11px; color: #4ade80; margin-top: 3px;">
+                                                        -{{ number_format($booking->discount_amount, 0, ',', '.') }} đ ({{ $booking->points_used }} điểm)
+                                                    </div>
+                                                    @endif
                                                 </td>
                                                 <td align="right">
                                                     <span style="font-size: 12px; color: #94a3b8; display: block;">Tổng tiền thanh toán:</span>
                                                     <span style="font-size: 22px; font-weight: 900; color: #e50914;">
                                                         {{ number_format($booking->total_price, 0, ',', '.') }} VNĐ
                                                     </span>
+                                                    <div style="font-size: 11px; color: #fbbf24; margin-top: 3px; font-weight: 600;">
+                                                        ✨ Nhận +{{ $booking->points_earned ?? ($booking->tickets->count() * 10) }} điểm tích lũy
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </table>

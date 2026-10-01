@@ -23,6 +23,7 @@
                     <th class="px-6 py-3 font-medium tracking-wider">Chương Trình</th>
                     <th class="px-6 py-3 font-medium tracking-wider">Giảm Giá</th>
                     <th class="px-6 py-3 font-medium tracking-wider">Thời Gian</th>
+                    <th class="px-6 py-3 font-medium tracking-wider">Trạng Thái</th>
                     <th class="px-6 py-3 font-medium tracking-wider text-right">Thao tác</th>
                 </tr>
             </thead>
@@ -52,9 +53,27 @@
                             Quà tặng
                         @endif
                     </td>
-                    <td class="px-6 py-4 text-gray-600">
-                        {{ \Carbon\Carbon::parse($promo->start_date)->format('d/m/Y') }} - 
-                        {{ \Carbon\Carbon::parse($promo->end_date)->format('d/m/Y') }}
+                    <td class="px-6 py-4 text-gray-600 font-medium">
+                        <div>{{ \Carbon\Carbon::parse($promo->start_date)->format('d/m/Y') }}</div>
+                        <div class="text-xs text-gray-400">đến {{ \Carbon\Carbon::parse($promo->end_date)->format('d/m/Y') }}</div>
+                    </td>
+                    <td class="px-6 py-4">
+                        @if($promo->isExpired())
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-700 border border-red-200" title="Voucher đã hết hạn và đang bị ẩn trên trang Khuyến mãi">
+                                <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                                Hết hạn (Đã ẩn)
+                            </span>
+                        @elseif($promo->isUpcoming())
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200" title="Chưa đến ngày bắt đầu áp dụng">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                Chưa bắt đầu
+                            </span>
+                        @else
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200" title="Đang hiển thị trên trang Khuyến mãi">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                Đang hiển thị
+                            </span>
+                        @endif
                     </td>
                     <td class="px-6 py-4 text-right">
                         <div class="flex items-center justify-end gap-2">
@@ -73,7 +92,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="px-6 py-8 text-center text-gray-500">Chưa có khuyến mãi nào.</td>
+                    <td colspan="6" class="px-6 py-8 text-center text-gray-500">Chưa có khuyến mãi nào.</td>
                 </tr>
                 @endforelse
             </tbody>

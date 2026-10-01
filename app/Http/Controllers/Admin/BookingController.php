@@ -8,14 +8,32 @@ use App\Models\Booking;
 
 class BookingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bookings = Booking::with(['user', 'showtime.movie', 'showtime.room.cinema'])->orderBy('created_at', 'desc')->get();
-        return view('admin.bookings.index', compact('bookings'));
+        Booking::cleanupExpired();
+
+        $query = Booking::with(['user', 'showtime.movie', 'showtime.room.cinema'])->orderBy('created_at', 'desc');
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $bookings = $query->get();
+
+        $statusCounts = [
+            'all' => Booking::count(),
+            'paid' => Booking::where('status', 'paid')->count(),
+            'pending' => Booking::where('status', 'pending')->count(),
+            'cancelled' => Booking::where('status', 'cancelled')->count(),
+        ];
+
+        return view('admin.bookings.index', compact('bookings', 'statusCounts'));
     }
 
     public function show($id)
     {
+        Booking::cleanupExpired();
+
         $booking = Booking::with(['user', 'showtime.movie', 'showtime.room.cinema', 'tickets.seat', 'foods'])->findOrFail($id);
         return view('admin.bookings.show', compact('booking'));
     }
@@ -28,8 +46,15 @@ class BookingController extends Controller
             'status' => 'required|in:pending,paid,cancelled',
         ]);
 
-        $booking->status = $request->status;
-        $booking->save();
+        if ($request->status === 'cancelled') {
+            $booking->releaseSeats();
+        } else {
+            $booking->status = $request->status;
+            if ($request->status === 'paid') {
+                $booking->tickets()->update(['status' => 'booked']);
+            }
+            $booking->save();
+        }
 
         return redirect()->back()->with('success', 'Cập nhật trạng thái đơn hàng thành công!');
     }

@@ -7,7 +7,7 @@
     <div class="max-w-6xl mx-auto px-6 md:px-12">
         
         <!-- Header Info -->
-        <div class="bg-white/5 border border-white/10 rounded-xl p-6 mb-8 flex flex-col md:flex-row justify-between items-center gap-4 shadow-lg">
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6 mb-6 flex flex-col md:flex-row justify-between items-center gap-4 shadow-lg">
             <div>
                 <h2 class="text-2xl font-serif font-bold text-white">Chọn Bắp Nước & Combo</h2>
                 <p class="text-gray-400 mt-1">
@@ -17,6 +17,26 @@
             <div class="text-right">
                 <p class="text-sm text-gray-400">Tạm tính (Chưa gồm bắp nước)</p>
                 <p class="text-xl font-bold text-cinematic-gold">{{ number_format($ticketTotal ?? $booking->total_price, 0, ',', '.') }} VNĐ</p>
+            </div>
+        </div>
+
+        <!-- 5-Minute Seat Hold Countdown Banner -->
+        <div class="hold-countdown-banner checkout-countdown-banner mb-8 p-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+            <div class="flex items-center gap-3.5">
+                <div class="hold-countdown-icon checkout-countdown-icon animate-pulse">
+                    ⏱️
+                </div>
+                <div>
+                    <p class="hold-countdown-title checkout-countdown-title flex flex-wrap items-center gap-2">
+                        Ghế đang được giữ chỗ trong 5 phút
+                        <span class="hold-countdown-seats checkout-countdown-seats">({{ $booking->tickets->map(fn($t) => $t->seat ? ($t->seat->row . $t->seat->number) : '')->filter()->join(', ') }})</span>
+                    </p>
+                    <p class="hold-countdown-desc checkout-countdown-desc">Vui lòng hoàn tất đặt vé trước khi hết thời gian giữ chỗ để không bị mất ghế.</p>
+                </div>
+            </div>
+            <div class="hold-countdown-box checkout-countdown-box">
+                <span class="hold-countdown-label checkout-countdown-label">Thời gian còn lại</span>
+                <span id="holdCountdown" class="hold-countdown-digits checkout-countdown-digits">05:00</span>
             </div>
         </div>
 
@@ -170,6 +190,33 @@
 
         // Run initial update
         updateSummary();
+
+        // 5-Minute Seat Hold Countdown Timer
+        let holdSeconds = {{ max(0, $booking->remaining_seconds) }};
+        const countdownEl = document.getElementById('holdCountdown');
+
+        function updateHoldTimer() {
+            if (holdSeconds <= 0) {
+                if (countdownEl) countdownEl.textContent = '00:00';
+                clearInterval(holdInterval);
+                alert('Thời gian giữ ghế (5 phút) đã hết! Ghế đã được hoàn trả về trạng thái trống. Vui lòng chọn lại ghế.');
+                window.location.href = "{{ route('booking.seats', $booking->showtime_id) }}";
+                return;
+            }
+            const mins = Math.floor(holdSeconds / 60);
+            const secs = holdSeconds % 60;
+            if (countdownEl) {
+                countdownEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                if (holdSeconds <= 60) {
+                    countdownEl.classList.remove('text-cinematic-gold');
+                    countdownEl.classList.add('text-red-500', 'animate-pulse');
+                }
+            }
+            holdSeconds--;
+        }
+
+        updateHoldTimer();
+        const holdInterval = setInterval(updateHoldTimer, 1000);
     });
 </script>
 @endsection

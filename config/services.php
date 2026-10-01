@@ -41,4 +41,13 @@ return [
         'url' => env('VNPAY_URL', 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'),
     ],
 
+    'sepay' => [
+        'api_key' => env('SEPAY_API_KEY', ''),
+        'account_number' => env('SEPAY_ACCOUNT_NUMBER', '031205090305'),
+        'bank_name' => env('SEPAY_BANK_NAME', 'MB'),
+        'account_holder' => env('SEPAY_ACCOUNT_HOLDER', 'Trần Văn Hảo'),
+    ],
+
+
 ];
+

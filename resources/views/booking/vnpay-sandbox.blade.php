@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cổng thanh toán VNPAY - Môi trường Thử Nghiệm Sandbox</title>
+    <title>Cổng thanh toán VNPAY</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,9 +41,9 @@
                 <div class="h-6 w-px bg-gray-300 hidden sm:block"></div>
                 <div class="hidden sm:flex flex-col">
                     <span class="text-xs font-bold text-gray-700 uppercase tracking-wider">Cổng Thanh Toán Điện Tử</span>
-                    <span class="text-[10px] text-amber-600 font-semibold flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                        Môi Trường Sandbox (Thử Nghiệm)
+                    <span class="text-[10px] text-green-600 font-semibold flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                        Cổng Thanh Toán Trực Tuyến
                     </span>
                 </div>
             </div>
@@ -82,6 +82,11 @@
                 <div class="text-left md:text-right bg-blue-50/70 p-3 sm:p-4 rounded-xl border border-blue-100 shrink-0 w-full md:w-auto">
                     <span class="text-xs text-gray-600 block">Số tiền thanh toán:</span>
                     <span class="text-2xl sm:text-3xl font-extrabold text-[#ed1c24]">{{ number_format($booking->total_price, 0, ',', '.') }} <span class="text-sm font-semibold text-gray-700">VND</span></span>
+                    @if($booking->discount_amount > 0)
+                        <div class="text-[11px] text-green-700 font-medium mt-0.5">
+                            Đã trừ {{ $booking->points_used }} điểm (-{{ number_format($booking->discount_amount, 0, ',', '.') }} đ)
+                        </div>
+                    @endif
                     <div class="text-[11px] text-gray-500 mt-1 flex items-center justify-start md:justify-end gap-1">
                         <span>Mã đơn:</span>
                         <code class="font-mono text-gray-800 bg-white px-1.5 py-0.5 rounded border border-gray-200">#{{ $booking->id }}</code>
@@ -92,8 +97,8 @@
             <!-- Countdown Timer & Notice -->
             <div class="pt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-500">
                 <div class="flex items-center gap-2">
-                    <span class="text-gray-600">Giao dịch hết hạn trong:</span>
-                    <span id="countdownTimer" class="font-mono font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-200">14:59</span>
+                    <span class="text-gray-600">Thời gian giữ ghế còn lại:</span>
+                    <span id="countdownTimer" class="font-mono font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-200">05:00</span>
                 </div>
                 <div class="text-gray-400">Mã giao dịch: <span class="font-mono text-gray-600">{{ $vnp_TxnRef }}</span></div>
             </div>
@@ -118,7 +123,7 @@
                             </div>
                             <div>
                                 <span class="font-bold text-sm block">Thẻ ATM nội địa</span>
-                                <span class="text-[11px] text-gray-500">Khuyên dùng test (NCB)</span>
+                                <span class="text-[11px] text-gray-500">Khuyên dùng (NCB)</span>
                             </div>
                         </div>
                         <span class="w-2.5 h-2.5 rounded-full bg-[#005baa]"></span>
@@ -159,13 +164,13 @@
                     </button>
                 </div>
 
-                <!-- Test Info Box -->
-                <div class="mt-6 p-3.5 bg-amber-50 rounded-xl border border-amber-200 text-amber-900 text-xs space-y-1.5">
+                <!-- Info Box -->
+                <div class="mt-6 p-3.5 bg-blue-50 rounded-xl border border-blue-200 text-blue-900 text-xs space-y-1.5">
                     <p class="font-bold flex items-center gap-1">
-                        <span>💡</span> Hướng dẫn test Sandbox:
+                        <span>💡</span> Hướng dẫn thanh toán:
                     </p>
-                    <p class="text-[11px] leading-relaxed text-amber-800">
-                        Chọn ngân hàng <strong>NCB</strong>, nhập số thẻ test <code>9704198526191432198</code> và OTP <code>123456</code> để hoàn tất giao dịch.
+                    <p class="text-[11px] leading-relaxed text-blue-800">
+                        Chọn ngân hàng <strong>NCB</strong>, số thẻ đã được điền sẵn hoặc nhấn <strong>Điền thông tin thẻ</strong> để tiếp tục xác thực OTP.
                     </p>
                 </div>
             </div>
@@ -181,10 +186,10 @@
                         <div class="flex items-center justify-between mb-4">
                             <div>
                                 <h3 class="text-base font-bold text-gray-900">Chọn ngân hàng thanh toán</h3>
-                                <p class="text-xs text-gray-500">Môi trường test hỗ trợ ngân hàng NCB</p>
+                                <p class="text-xs text-gray-500">Hỗ trợ ngân hàng NCB và các ngân hàng liên kết</p>
                             </div>
                             <button type="button" onclick="autoFillTestCard()" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-[#005baa] text-xs font-semibold rounded-lg border border-blue-200 transition flex items-center gap-1.5">
-                                <span>⚡</span> Điền nhanh thẻ test
+                                <span>⚡</span> Điền thông tin thẻ
                             </button>
                         </div>
 
@@ -193,7 +198,7 @@
                             <!-- NCB Bank (Active) -->
                             <div class="p-2.5 border-2 border-[#005baa] bg-blue-50/50 rounded-xl text-center cursor-pointer shadow-sm relative">
                                 <span class="block font-black text-sm text-[#005baa]">NCB</span>
-                                <span class="text-[10px] text-gray-500 block truncate">Quốc Dân (Test)</span>
+                                <span class="text-[10px] text-gray-500 block truncate">Ngân hàng NCB</span>
                                 <div class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[#005baa] rounded-full text-white flex items-center justify-center text-[10px]">✓</div>
                             </div>
 
@@ -283,7 +288,7 @@
                             <div>
                                 <span class="font-bold text-sm block mb-0.5">Xác thực mã OTP Ngân hàng</span>
                                 <p class="text-blue-800 leading-relaxed">
-                                    VNPAY đã gửi mã xác thực giao dịch tới số điện thoại thử nghiệm của quý khách. Nhập mã để hoàn tất thanh toán số tiền <strong class="text-red-600">{{ number_format($booking->total_price, 0, ',', '.') }} đ</strong>.
+                                    VNPAY đã gửi mã xác thực giao dịch tới số điện thoại của quý khách. Nhập mã để hoàn tất thanh toán số tiền <strong class="text-red-600">{{ number_format($booking->total_price, 0, ',', '.') }} đ</strong>.
                                 </p>
                             </div>
                         </div>
@@ -300,7 +305,7 @@
                                 <div class="flex items-center justify-between mb-2">
                                     <label class="text-xs font-semibold text-gray-700">Nhập mã OTP:</label>
                                     <button type="button" onclick="autoFillOtp()" class="text-xs text-[#005baa] hover:underline font-semibold flex items-center gap-1">
-                                        <span>Gợi ý test:</span>
+                                        <span>Mã OTP:</span>
                                         <code class="bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200 font-bold">123456</code>
                                     </button>
                                 </div>
@@ -364,7 +369,7 @@
                             <input type="hidden" name="vnp_TransactionNo" value="QR_{{ time() }}">
 
                             <button type="submit" class="px-6 py-3 bg-[#005baa] hover:bg-[#004785] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow transition">
-                                ⚡ Mô phỏng quét mã thành công ngay
+                                ⚡ Xác nhận quét mã thành công
                             </button>
                         </form>
                     </div>
@@ -374,7 +379,7 @@
                 <div id="tabContent-card" class="hidden space-y-5">
                     <div>
                         <h3 class="text-base font-bold text-gray-900">Thanh toán qua Thẻ quốc tế Visa, Mastercard, JCB</h3>
-                        <p class="text-xs text-gray-500">Môi trường thử nghiệm Sandbox</p>
+                        <p class="text-xs text-gray-500">Hỗ trợ các loại thẻ thanh toán quốc tế</p>
                     </div>
 
                     <form action="{{ route('booking.vnpay_return') }}" method="GET" class="space-y-4 bg-gray-50/60 p-4 sm:p-5 rounded-xl border border-gray-200">
@@ -385,7 +390,7 @@
                         <input type="hidden" name="vnp_TransactionNo" value="VISA_{{ time() }}">
 
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1">Số thẻ quốc tế test:</label>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">Số thẻ quốc tế:</label>
                             <input type="text" value="4000 0012 3456 7890" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 font-mono text-sm font-semibold text-gray-900 bg-white">
                         </div>
 
@@ -424,7 +429,7 @@
     <footer class="bg-white border-t border-gray-200 py-4 mt-8 text-center text-xs text-gray-500">
         <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
             <div>
-                © {{ date('Y') }} VNPAY Sandbox Gateway. Tích hợp thanh toán trực tuyến cho HCTV Cinema.
+                © {{ date('Y') }} VNPAY Payment Gateway. Tích hợp thanh toán trực tuyến cho HCTV Cinema.
             </div>
             <div class="flex items-center gap-4 text-gray-400 text-xs">
                 <span>Hỗ trợ kỹ thuật: 1900 55 55 77</span>
@@ -462,7 +467,7 @@
         function goToOtpStep() {
             const cardNum = document.getElementById('inputCardNumber').value.trim();
             if (!cardNum) {
-                alert('Vui lòng nhập số thẻ ngân hàng thử nghiệm!');
+                alert('Vui lòng nhập số thẻ ngân hàng!');
                 return;
             }
             document.getElementById('step-card-form').classList.add('hidden');
@@ -485,21 +490,26 @@
             document.getElementById('inputOtp').value = '123456';
         }
 
-        // 15 Minutes Countdown Timer
-        let secondsRemaining = 15 * 60 - 1;
+        // 5-Minute Seat Hold Countdown Timer
+        let secondsRemaining = {{ max(0, $booking->remaining_seconds) }};
         const timerElement = document.getElementById('countdownTimer');
-        const timerInterval = setInterval(function() {
+        function updateTimer() {
             if (secondsRemaining <= 0) {
+                if (timerElement) timerElement.textContent = '00:00';
                 clearInterval(timerInterval);
-                alert('Giao dịch đã hết thời gian hiệu lực. Quý khách vui lòng thực hiện lại.');
-                window.location.href = "{{ route('booking.checkout', $booking->id) }}";
+                alert('Thời gian giữ ghế (5 phút) đã hết! Ghế đã được hoàn trả về trạng thái trống. Vui lòng chọn lại ghế.');
+                window.location.href = "{{ route('booking.seats', $booking->showtime_id) }}";
                 return;
             }
             const minutes = Math.floor(secondsRemaining / 60);
             const seconds = secondsRemaining % 60;
-            timerElement.textContent = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+            if (timerElement) {
+                timerElement.textContent = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+            }
             secondsRemaining--;
-        }, 1000);
+        }
+        updateTimer();
+        const timerInterval = setInterval(updateTimer, 1000);
     </script>
 </body>
 </html>

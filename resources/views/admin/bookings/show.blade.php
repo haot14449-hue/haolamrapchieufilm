@@ -9,7 +9,16 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
         </a>
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">Đơn hàng: HCTV-{{ sprintf('%06d', $booking->id) }}</h1>
+            <div class="flex items-center gap-3">
+                <h1 class="text-2xl font-bold text-gray-900">Đơn hàng: HCTV-{{ sprintf('%06d', $booking->id) }}</h1>
+                @if($booking->status == 'paid')
+                    <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-green-100 text-green-800 border border-green-200">Đã thanh toán</span>
+                @elseif($booking->status == 'pending')
+                    <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 border border-yellow-200">Chờ thanh toán</span>
+                @else
+                    <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-red-100 text-red-800 border border-red-200">Đã hủy</span>
+                @endif
+            </div>
             <p class="text-sm text-gray-500 mt-1">Ngày đặt: {{ $booking->created_at->format('d/m/Y H:i') }}</p>
         </div>
     </div>

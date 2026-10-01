@@ -134,29 +134,93 @@ html.light-mode #mobile-menu-toggle {
 }
 
 /* User Dropdown Menu & Mobile Navigation Drawer */
-html.light-mode header .group .absolute.right-0 {
-    background-color: rgba(255, 255, 255, 0.98) !important;
+html.light-mode header .group .absolute.right-0,
+html.light-mode .user-dropdown-menu {
+    background-color: #ffffff !important;
     border-color: #e2e8f0 !important;
-    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.08) !important;
     color: #0f172a !important;
 }
 
 html.light-mode header .group .border-b,
-html.light-mode header .group .border-t {
+html.light-mode header .group .border-t,
+html.light-mode .user-dropdown-header {
     border-color: #f1f5f9 !important;
 }
 
-html.light-mode header .group a {
-    color: #334155 !important;
+html.light-mode .user-dropdown-header {
+    background-color: #f8fafc !important;
 }
 
-html.light-mode header .group a:hover {
-    background-color: #f8fafc !important;
+html.light-mode header .group a,
+html.light-mode .user-dropdown-item {
+    color: #1e293b !important;
+}
+
+html.light-mode header .group a *,
+html.light-mode .user-dropdown-item * {
+    color: #1e293b !important;
+}
+
+html.light-mode header .group a svg,
+html.light-mode .user-dropdown-item svg {
+    color: #64748b !important;
+}
+
+html.light-mode header .group a:hover,
+html.light-mode .user-dropdown-item:hover {
+    background-color: #f1f5f9 !important;
     color: #e50914 !important;
 }
 
-html.light-mode header .group .text-white {
+html.light-mode header .group a:hover *,
+html.light-mode .user-dropdown-item:hover * {
+    color: #e50914 !important;
+}
+
+html.light-mode header .group a:hover svg,
+html.light-mode .user-dropdown-item:hover svg {
+    color: #e50914 !important;
+}
+
+html.light-mode header .group .text-white,
+html.light-mode .user-dropdown-name {
     color: #0f172a !important;
+}
+
+html.light-mode header .group .text-cinematic-gold,
+html.light-mode .user-dropdown-points {
+    color: #b45309 !important;
+}
+
+html.light-mode .user-dropdown-voucher-badge {
+    background-color: #fef3c7 !important;
+    color: #92400e !important;
+    border-color: #fcd34d !important;
+    font-weight: 700 !important;
+}
+
+html.light-mode .user-dropdown-footer {
+    border-top: 1px solid #f1f5f9 !important;
+    background-color: #f8fafc !important;
+}
+
+html.light-mode .user-dropdown-footer a,
+html.light-mode .user-dropdown-footer a * {
+    color: #dc2626 !important;
+}
+
+html.light-mode .user-dropdown-footer a svg {
+    color: #dc2626 !important;
+}
+
+html.light-mode .user-dropdown-footer a:hover {
+    background-color: #fee2e2 !important;
+    color: #b91c1c !important;
+}
+
+html.light-mode .user-dropdown-footer a:hover * {
+    color: #b91c1c !important;
 }
 
 html.light-mode header .group .text-gray-400 {
@@ -170,13 +234,21 @@ html.light-mode #mobile-nav-menu {
     box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.15) !important;
 }
 
-html.light-mode #mobile-nav-menu a {
-    color: #334155 !important;
+html.light-mode #mobile-nav-menu a,
+html.light-mode #mobile-nav-menu a * {
+    color: #1e293b !important;
 }
 
 html.light-mode #mobile-nav-menu a:hover,
+html.light-mode #mobile-nav-menu a:hover *,
 html.light-mode #mobile-nav-menu a.text-cinematic-gold {
     color: #e50914 !important;
+}
+
+html.light-mode #mobile-nav-menu span.bg-cinematic-gold\/20 {
+    background-color: #fef3c7 !important;
+    color: #92400e !important;
+    border-color: #fcd34d !important;
 }
 
 html.light-mode #mobile-nav-menu .border-t {
@@ -239,6 +311,60 @@ html.light-mode .bg-blue-600 * {
 }
 
 /* ==========================================================================
+   GENRE CAROUSEL CARDS ("Bạn đang quan tâm gì?")
+   ========================================================================== */
+html.light-mode .genre-card-item,
+html.light-mode .genre-card-item * {
+    color: #ffffff !important;
+}
+
+html.light-mode .genre-card-item h3 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85), 0 0 8px rgba(0, 0, 0, 0.6) !important;
+}
+
+html.light-mode .genre-card-item:hover h3 {
+    color: #fef08a !important;
+}
+
+html.light-mode .genre-card-item div,
+html.light-mode .genre-card-item span {
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+
+html.light-mode .genre-card-item svg {
+    color: #ffffff !important;
+}
+
+html.light-mode .genre-scroll-btn {
+    background-color: #e2e8f0 !important;
+    color: #475569 !important;
+}
+
+html.light-mode .genre-scroll-btn:hover {
+    background-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+html.light-mode .genre-scroll-track {
+    background-color: #e2e8f0 !important;
+}
+
+html.light-mode .genre-scroll-thumb {
+    background-color: #94a3b8 !important;
+}
+
+html.light-mode .genre-title-prefix {
+    color: #0f172a !important;
+}
+
+html.light-mode .group-hover\:opacity-100,
+html.light-mode .group-hover\:opacity-100 * {
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
    VIP MEMBERSHIP CARD (Screenshot 1 Fix)
    ========================================================================== */
 html.light-mode .membership-card {
@@ -279,15 +405,306 @@ html.light-mode .map-overlay-badge span:not(.rounded-full) {
 }
 
 /* ==========================================================================
-   CHECKOUT PAGE (Screenshot 2 Fix)
+   CHECKOUT PAGE (Theme & Contrast Balance)
    ========================================================================== */
-/* Movie Backdrop Title on Dark Poster */
+/* Page Title & Headings */
+html.light-mode .checkout-page-title {
+    color: #0f172a !important;
+}
+
+html.light-mode .checkout-card-heading {
+    color: #0f172a !important;
+}
+
+/* ========================================================
+   SEAT HOLD COUNTDOWN BANNER (Food, Checkout, Pay QR)
+   ======================================================== */
+.hold-countdown-banner,
+.checkout-countdown-banner {
+    background: linear-gradient(135deg, rgba(69, 10, 15, 0.7) 0%, rgba(26, 10, 15, 0.85) 100%) !important;
+    border: 1.5px solid rgba(225, 29, 72, 0.45) !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+.hold-countdown-icon,
+.checkout-countdown-icon {
+    width: 2.75rem !important;
+    height: 2.75rem !important;
+    border-radius: 9999px !important;
+    background-color: rgba(225, 29, 72, 0.18) !important;
+    border: 1.5px solid rgba(244, 63, 94, 0.45) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.25rem !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 0 15px rgba(225, 29, 72, 0.25) !important;
+}
+
+.hold-countdown-title,
+.checkout-countdown-title {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.35 !important;
+}
+
+.hold-countdown-seats,
+.checkout-countdown-seats {
+    display: inline-flex !important;
+    align-items: center !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fda4af !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 0.375rem !important;
+    padding: 0.15rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+}
+
+.hold-countdown-desc,
+.checkout-countdown-desc {
+    color: #fecdd3 !important;
+    font-size: 0.8125rem !important;
+    font-weight: 400 !important;
+    margin-top: 0.2rem !important;
+}
+
+.hold-countdown-box,
+.checkout-countdown-box {
+    background-color: rgba(10, 10, 15, 0.85) !important;
+    border: 1.5px solid rgba(245, 158, 11, 0.4) !important;
+    border-radius: 0.75rem !important;
+    padding: 0.5rem 1.25rem !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
+}
+
+.hold-countdown-label,
+.checkout-countdown-label,
+.hold-countdown-box span:first-child,
+.checkout-countdown-box span:first-child {
+    display: block !important;
+    color: #fbbf24 !important;
+    font-size: 0.6875rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    margin-bottom: 2px !important;
+}
+
+.hold-countdown-digits,
+.checkout-countdown-digits,
+.hold-countdown-box #holdCountdown,
+.checkout-countdown-box #holdCountdown {
+    display: block !important;
+    color: #fbbf24 !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-size: 1.625rem !important;
+    font-weight: 900 !important;
+    line-height: 1.15 !important;
+    text-shadow: 0 0 12px rgba(251, 191, 36, 0.4) !important;
+}
+
+/* Light mode for Seat Hold Banner */
+html.light-mode .hold-countdown-banner,
+html.light-mode .checkout-countdown-banner {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffe4e6 55%, #fecdd3 100%) !important;
+    border: 1.5px solid #f43f5e !important;
+    box-shadow: 0 6px 20px rgba(244, 63, 94, 0.12) !important;
+}
+
+html.light-mode .hold-countdown-icon,
+html.light-mode .checkout-countdown-icon {
+    background-color: #ffffff !important;
+    border: 1.5px solid #fb7185 !important;
+    box-shadow: 0 2px 8px rgba(244, 63, 94, 0.15) !important;
+}
+
+html.light-mode .hold-countdown-title,
+html.light-mode .checkout-countdown-title {
+    color: #881337 !important; /* Deep luxury rose-red with 10:1 contrast ratio */
+    font-weight: 800 !important;
+}
+
+html.light-mode .hold-countdown-seats,
+html.light-mode .checkout-countdown-seats {
+    background-color: #ffffff !important;
+    color: #be123c !important;
+    border: 1.5px solid #fca5a5 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light-mode .hold-countdown-desc,
+html.light-mode .checkout-countdown-desc {
+    color: #9f1239 !important; /* Dark crimson red for 100% readability */
+    font-weight: 500 !important;
+}
+
+html.light-mode .hold-countdown-box,
+html.light-mode .checkout-countdown-box {
+    background-color: #ffffff !important;
+    border: 2px solid #e11d48 !important;
+    box-shadow: 0 4px 14px rgba(225, 29, 72, 0.18) !important;
+}
+
+html.light-mode .hold-countdown-label,
+html.light-mode .checkout-countdown-label,
+html.light-mode .hold-countdown-box span:first-child,
+html.light-mode .checkout-countdown-box span:first-child {
+    color: #9f1239 !important; /* Bold crimson label */
+    font-weight: 800 !important;
+}
+
+html.light-mode .hold-countdown-digits,
+html.light-mode .checkout-countdown-digits,
+html.light-mode .hold-countdown-box #holdCountdown,
+html.light-mode .checkout-countdown-box #holdCountdown {
+    color: #e11d48 !important; /* Vibrant high-contrast crimson timer digits */
+    text-shadow: none !important;
+}
+
+html.light-mode .hold-countdown-box #holdCountdown.text-red-500,
+html.light-mode .checkout-countdown-box #holdCountdown.text-red-500 {
+    color: #b91c1c !important;
+}
+
+/* Reward Points Section */
+html.light-mode .checkout-points-box,
+html.light-mode .checkout-no-points-box {
+    background-color: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+}
+
+html.light-mode .checkout-points-label {
+    color: #334155 !important;
+}
+
+html.light-mode .checkout-points-input {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+html.light-mode .checkout-points-max-btn {
+    background-color: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #b45309 !important;
+}
+
+html.light-mode .checkout-points-max-btn:hover {
+    background-color: #e2e8f0 !important;
+}
+
+html.light-mode .checkout-points-bold {
+    color: #0f172a !important;
+}
+
+html.light-mode .checkout-applied-text {
+    color: #0f172a !important;
+}
+
+/* Payment Methods (MB Bank & VNPay) */
+html.light-mode .method-mb-option.is-active-mb {
+    background: #eff6ff !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.12) !important;
+}
+
+html.light-mode .method-mb-option.is-inactive {
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+
+html.light-mode .method-vnpay-option.is-active-vnpay {
+    background: #fef2f2 !important;
+    border-color: #ef4444 !important;
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.12) !important;
+}
+
+html.light-mode .method-vnpay-option.is-inactive {
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+
+html.light-mode .checkout-payment-option.is-inactive:hover {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+}
+
+html.light-mode .checkout-method-title {
+    color: #0f172a !important;
+}
+
+html.light-mode .checkout-method-desc {
+    color: #475569 !important;
+}
+
+html.light-mode .checkout-strong-highlight {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+html.light-mode .checkout-badge-gold {
+    background-color: #fef3c7 !important;
+    border-color: #fde68a !important;
+    color: #92400e !important;
+}
+
+html.light-mode .checkout-badge-green {
+    background-color: #dcfce7 !important;
+    border-color: #86efac !important;
+    color: #166534 !important;
+}
+
+html.light-mode .checkout-badge-gray {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}
+
+html.light-mode .checkout-mb-footer {
+    border-color: #bfdbfe !important;
+    color: #1d4ed8 !important;
+}
+
+html.light-mode .checkout-mb-footer span {
+    color: #1d4ed8 !important;
+}
+
+/* VNPay Test Info Box */
+html.light-mode #vnpay-guide {
+    background-color: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+    color: #334155 !important;
+}
+
+html.light-mode #vnpay-guide .bg-black\/30 {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #334155 !important;
+}
+
+html.light-mode #vnpay-guide .text-white {
+    color: #0f172a !important;
+}
+
+/* Sidebar Order Details */
+html.light-mode .checkout-summary-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
 html.light-mode .checkout-movie-title {
     color: #ffffff !important;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
 }
 
-/* Sidebar Order Details */
 html.light-mode .checkout-detail-value {
     color: #0f172a !important;
 }
@@ -298,61 +715,214 @@ html.light-mode .checkout-seats-value {
 }
 
 html.light-mode .checkout-total-label {
-    color: #475569 !important;
+    color: #334155 !important;
 }
 
 html.light-mode .checkout-email-value {
     color: #0f172a !important;
 }
 
-/* VNPay Payment Method Title & Subtitle */
-html.light-mode .vnpay-method-title {
+/* ==========================================================================
+   SUCCESS PAGE (Screenshot 2 Fix)
+   ========================================================================== */
+html.light-mode .success-title {
     color: #0f172a !important;
 }
 
-html.light-mode .vnpay-method-sub {
-    color: #64748b !important;
+html.light-mode .success-desc {
+    color: #475569 !important;
 }
 
-/* VNPay Status Badge */
-html.light-mode .vnpay-status-badge {
-    background-color: #dcfce7 !important;
-    border-color: #86efac !important;
+html.light-mode .success-email-alert {
+    background-color: #f0fdf4 !important;
+    border-color: #bbf7d0 !important;
     color: #15803d !important;
 }
 
-/* VNPay Sandbox Test Guide Box */
-html.light-mode .vnpay-guide-box {
-    background-color: #f1f5f9 !important;
-    border-color: #cbd5e1 !important;
-    color: #334155 !important;
+html.light-mode .success-email-alert strong {
+    color: #14532d !important;
 }
 
-html.light-mode .vnpay-guide-title {
-    color: #b45309 !important;
-}
-
-html.light-mode .vnpay-guide-note {
-    color: #64748b !important;
-}
-
-html.light-mode .vnpay-guide-grid {
+/* "Về Trang Chủ" button fix: high contrast in Light Mode */
+html.light-mode .btn-home-link {
     background-color: #ffffff !important;
-    border-color: #e2e8f0 !important;
-    color: #475569 !important;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #1e293b !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
 }
 
-html.light-mode .vnpay-grid-value {
+html.light-mode .btn-home-link:hover {
+    background-color: #f1f5f9 !important;
+    border-color: #94a3b8 !important;
     color: #0f172a !important;
 }
 
-html.light-mode .vnpay-grid-otp {
+/* ==========================================================================
+   PAY QR PAGE (/booking/pay-qr/{id})
+   ========================================================================== */
+html.light-mode .qr-page-title {
+    color: #0f172a !important;
+}
+
+html.light-mode .qr-page-subtitle {
+    color: #64748b !important;
+}
+
+html.light-mode .qr-card-box {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06) !important;
+    color: #0f172a !important;
+}
+
+html.light-mode .qr-bank-name {
+    color: #002D72 !important;
+    font-weight: 800 !important;
+}
+
+html.light-mode .qr-bank-label {
+    color: #64748b !important;
+}
+
+html.light-mode .qr-waiting-box {
+    background-color: #eff6ff !important;
+    border-color: #bfdbfe !important;
+}
+
+html.light-mode .qr-waiting-text {
+    color: #1d4ed8 !important;
+}
+
+html.light-mode .qr-btn-action {
+    background-color: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #334155 !important;
+}
+
+html.light-mode .qr-btn-action:hover {
+    background-color: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+
+html.light-mode .qr-btn-copy {
+    background-color: #eff6ff !important;
+    border: 1px solid #bfdbfe !important;
+    color: #1d4ed8 !important;
+}
+
+html.light-mode .qr-btn-copy:hover {
+    background-color: #dbeafe !important;
+    color: #1e40af !important;
+}
+
+html.light-mode .qr-instructions {
+    border-color: #e2e8f0 !important;
+    color: #64748b !important;
+}
+
+html.light-mode .qr-instructions p.font-bold {
+    color: #1e293b !important;
+}
+
+html.light-mode .qr-bank-info-title {
+    color: #0f172a !important;
+}
+
+html.light-mode .qr-info-row {
+    background-color: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+}
+
+html.light-mode .qr-info-row:hover {
+    border-color: #3b82f6 !important;
+    background-color: #f1f5f9 !important;
+}
+
+html.light-mode .qr-info-label {
+    color: #64748b !important;
+}
+
+html.light-mode .qr-info-value {
+    color: #0f172a !important;
+}
+
+html.light-mode .qr-bank-sub {
+    color: #64748b !important;
+}
+
+html.light-mode .qr-transfer-box {
+    background: linear-gradient(to right, #eff6ff, #f5f3ff) !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.12) !important;
+}
+
+html.light-mode .qr-transfer-label {
+    color: #1d4ed8 !important;
+}
+
+html.light-mode .qr-transfer-code {
     color: #b45309 !important;
 }
 
-html.light-mode .vnpay-grid-status {
-    color: #16a34a !important;
+html.light-mode .qr-transfer-note {
+    color: #475569 !important;
+}
+
+html.light-mode .qr-transfer-bold {
+    color: #0f172a !important;
+}
+
+html.light-mode .qr-summary-title {
+    color: #334155 !important;
+}
+
+html.light-mode .qr-summary-movie-title {
+    color: #0f172a !important;
+}
+
+html.light-mode .qr-summary-cinema {
+    color: #64748b !important;
+}
+
+html.light-mode .qr-summary-time {
+    color: #b45309 !important;
+}
+
+html.light-mode .qr-summary-label {
+    color: #64748b !important;
+}
+
+html.light-mode .qr-summary-seats {
+    color: #b45309 !important;
+}
+
+html.light-mode .qr-summary-foods {
+    color: #334155 !important;
+}
+
+html.light-mode .qr-summary-total-label {
+    color: #334155 !important;
+}
+
+html.light-mode .qr-summary-total-val {
+    color: #b45309 !important;
+}
+
+html.light-mode .qr-demo-box {
+    background: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+}
+
+html.light-mode .qr-demo-title {
+    color: #b45309 !important;
+}
+
+html.light-mode .qr-demo-sub {
+    color: #64748b !important;
+}
+
+html.light-mode .qr-demo-desc {
+    color: #475569 !important;
 }
 
 /* ==========================================================================
@@ -653,30 +1223,875 @@ html.light-mode select {
     border-color: #cbd5e1 !important;
 }
 
-/* Footer in Light Mode */
+/* ==========================================================================
+   SITE FOOTER - DISTINCT CINEMA STYLING (Both Dark Mode & Light Mode)
+   Đảm bảo dù ở nền đen hay nền trắng, chân trang luôn có màu sắc riêng biệt,
+   sang trọng và toàn bộ chữ, icon, logo đều rõ nét 100%.
+   ========================================================================== */
+footer.site-footer,
+html.light-mode footer.site-footer,
 html.light-mode footer {
-    background-color: #ffffff !important;
-    border-top: 1px solid #e2e8f0 !important;
-    color: #64748b !important;
+    background-color: #0c1322 !important; /* Xanh than bóng đêm cinema sang trọng */
+    border-top: 3px solid #e50914 !important; /* Đường viền đỏ cinematic nổi bật */
+    color: #cbd5e1 !important;
+    box-shadow: 0 -12px 30px rgba(0, 0, 0, 0.35) !important;
 }
 
+footer.site-footer .footer-brand-bar,
+html.light-mode footer.site-footer .footer-brand-bar,
+html.light-mode footer .border-b {
+    background-color: #060a12 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+footer.site-footer h3,
+html.light-mode footer.site-footer h3,
 html.light-mode footer h3 {
-    color: #0f172a !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
 }
 
+footer.site-footer a,
+html.light-mode footer.site-footer a,
 html.light-mode footer a {
-    color: #64748b !important;
+    color: #cbd5e1 !important;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
+footer.site-footer a:hover,
+html.light-mode footer.site-footer a:hover,
 html.light-mode footer a:hover {
     color: #e50914 !important;
 }
 
-html.light-mode footer .border-b {
-    border-color: #f1f5f9 !important;
+footer.site-footer .footer-hotline,
+html.light-mode footer.site-footer .footer-hotline,
+html.light-mode footer strong.text-white {
+    color: #fbbf24 !important; /* Vàng kim cinema nổi bật */
+}
+
+footer.site-footer .footer-logo-main,
+html.light-mode footer.site-footer .footer-logo-main,
+html.light-mode footer a.font-serif {
+    color: #ffffff !important;
+}
+
+footer.site-footer p,
+html.light-mode footer.site-footer p,
+html.light-mode footer p {
+    color: #94a3b8 !important;
+}
+
+footer.site-footer .footer-divider,
+html.light-mode footer.site-footer .footer-divider {
+    border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 html.light-mode footer span.text-gray-300,
 html.light-mode footer span.text-gray-500 {
+    color: #e2e8f0 !important;
+}
+
+/* ==========================================================================
+   INFORMATIONAL & POLICY PAGES (Complete Light & Dark Mode System)
+   ========================================================================== */
+
+/* 1. Page Hero Banner */
+.page-hero-banner {
+    background: linear-gradient(135deg, rgba(20, 24, 34, 0.95) 0%, rgba(10, 10, 16, 0.98) 50%, rgba(18, 20, 30, 0.95) 100%);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+.page-hero-title {
+    color: #ffffff;
+}
+.page-hero-desc {
+    color: #94a3b8;
+}
+.page-hero-badge {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #cbd5e1;
+}
+
+html.light-mode .page-hero-banner {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2f6 50%, #f1f5f9 100%) !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04) !important;
+}
+html.light-mode .page-hero-title {
+    color: #0f172a !important;
+}
+html.light-mode .page-hero-desc {
+    color: #475569 !important;
+}
+html.light-mode .page-hero-badge {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 2. Sidebar Support Card (Screenshot 2 Fix) */
+html.light-mode .sidebar-support-card {
+    background: linear-gradient(135deg, #fff1f2 0%, #ffffff 100%) !important;
+    border: 1px solid #fecdd3 !important;
+    box-shadow: 0 4px 15px rgba(225, 29, 72, 0.06) !important;
+}
+html.light-mode .sidebar-support-card h4 {
+    color: #9f1239 !important;
+}
+html.light-mode .sidebar-support-card p {
+    color: #4c0519 !important;
+}
+html.light-mode .sidebar-support-card p.text-cinematic-gold {
+    color: #e11d48 !important;
+}
+html.light-mode .sidebar-support-card a {
+    color: #be123c !important;
+}
+
+/* 3. Page Bottom CTA Banner (Screenshot 2 Fix) */
+html.light-mode .page-cta-banner {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+}
+html.light-mode .page-cta-banner h2,
+html.light-mode .page-cta-banner h3,
+html.light-mode .page-cta-banner h4 {
+    color: #0f172a !important;
+}
+html.light-mode .page-cta-banner p {
+    color: #475569 !important;
+}
+html.light-mode .page-cta-banner strong.text-white,
+html.light-mode .page-cta-banner strong {
+    color: #0f172a !important;
+}
+html.light-mode .page-cta-banner .text-gray-200,
+html.light-mode .page-cta-banner .text-gray-300 {
+    color: #334155 !important;
+}
+html.light-mode .page-cta-banner .text-gray-400 {
     color: #64748b !important;
 }
+
+/* 4. Luxury Gift Cards (Screenshot 3 Fix) */
+html.light-mode .gift-card-box {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06) !important;
+}
+html.light-mode .gift-card-silver {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%) !important;
+    border: 1px solid #cbd5e1 !important;
+}
+html.light-mode .gift-card-silver h3 {
+    color: #0f172a !important;
+}
+html.light-mode .gift-card-silver span.text-slate-400 {
+    color: #475569 !important;
+}
+
+html.light-mode .gift-card-gold {
+    background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%) !important;
+    border: 1px solid #fde68a !important;
+}
+html.light-mode .gift-card-gold h3 {
+    color: #b45309 !important;
+}
+html.light-mode .gift-card-gold span.text-cinematic-gold {
+    color: #b45309 !important;
+}
+
+html.light-mode .gift-card-platinum {
+    background: linear-gradient(135deg, #fff1f2 0%, #ffffff 100%) !important;
+    border: 1px solid #fecdd3 !important;
+}
+html.light-mode .gift-card-platinum h3 {
+    color: #e11d48 !important;
+}
+html.light-mode .gift-card-platinum span.text-red-400 {
+    color: #e11d48 !important;
+}
+
+html.light-mode .gift-card-diamond {
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%) !important;
+    border: 1px solid #bfdbfe !important;
+}
+html.light-mode .gift-card-diamond h3 {
+    color: #1d4ed8 !important;
+}
+html.light-mode .gift-card-diamond span.text-blue-400 {
+    color: #1d4ed8 !important;
+}
+
+html.light-mode .gift-card-box p {
+    color: #475569 !important;
+}
+html.light-mode .gift-card-box .border-t {
+    border-color: #e2e8f0 !important;
+}
+html.light-mode .gift-card-box span.text-\[11px\] {
+    color: #64748b !important;
+}
+html.light-mode .gift-card-box a {
+    color: #b45309 !important;
+}
+html.light-mode .gift-card-box .rounded-full {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+}
+
+/* 5. General Cards & Sections */
+html.light-mode .bg-white\/5 {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+    color: #0f172a !important;
+}
+html.light-mode div:not(.absolute):not(.fixed)[class*="p-"].bg-black\/40,
+html.light-mode div:not(.absolute):not(.fixed)[class*="p-"].bg-black\/20 {
+    background-color: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+html.light-mode div:not(.absolute):not(.fixed)[class*="p-"].bg-black\/40 h3,
+html.light-mode div:not(.absolute):not(.fixed)[class*="p-"].bg-black\/40 h4,
+html.light-mode div:not(.absolute):not(.fixed)[class*="p-"].bg-black\/20 h3,
+html.light-mode div:not(.absolute):not(.fixed)[class*="p-"].bg-black\/20 h4 {
+    color: #0f172a !important;
+}
+html.light-mode div:not(.absolute):not(.fixed)[class*="p-"].bg-black\/40 p,
+html.light-mode div:not(.absolute):not(.fixed)[class*="p-"].bg-black\/20 p {
+    color: #475569 !important;
+}
+html.light-mode .bg-white\/5 .text-white {
+    color: #0f172a !important;
+}
+html.light-mode .bg-white\/5 .text-gray-300 {
+    color: #334155 !important;
+}
+html.light-mode .bg-white\/5 .text-gray-400 {
+    color: #64748b !important;
+}
+html.light-mode .bg-white\/5 .border-white\/10 {
+    border-color: #e2e8f0 !important;
+}
+html.light-mode .bg-white\/5 .border-white\/5 {
+    border-color: #f1f5f9 !important;
+}
+
+/* Maintain crisp white text on colored buttons, gradient buttons, and discount badges in light mode */
+html.light-mode .bg-cinematic-red,
+html.light-mode .bg-cinematic-red *,
+html.light-mode .bg-white\/5 .bg-cinematic-red,
+html.light-mode .bg-white\/5 .bg-cinematic-red *,
+html.light-mode button.bg-cinematic-red,
+html.light-mode button.bg-cinematic-red *,
+html.light-mode a.bg-cinematic-red,
+html.light-mode a.bg-cinematic-red *,
+html.light-mode .btn-primary,
+html.light-mode .btn-primary * {
+    color: #ffffff !important;
+}
+
+
+
+/* 6. Alert & Warning Boxes */
+html.light-mode .transaction-warning-box {
+    background-color: #fff1f2 !important;
+    border: 1px solid #fecdd3 !important;
+    color: #9f1239 !important;
+}
+html.light-mode .transaction-warning-box strong {
+    color: #881337 !important;
+}
+html.light-mode .transaction-warning-box p {
+    color: #9f1239 !important;
+}
+
+html.light-mode .payment-support-box {
+    background-color: #eff6ff !important;
+    border: 1px solid #bfdbfe !important;
+    color: #1e40af !important;
+}
+html.light-mode .payment-support-box strong {
+    color: #1e3a8a !important;
+}
+html.light-mode .payment-support-box p {
+    color: #1e40af !important;
+}
+
+/* 7. FAQ Accordion Items */
+html.light-mode .faq-item {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+html.light-mode .faq-item button {
+    color: #0f172a !important;
+}
+html.light-mode .faq-item .faq-content {
+    color: #334155 !important;
+    border-color: #f1f5f9 !important;
+}
+
+/* 8. Voucher Wallet (Ví Voucher) Styles in Light Mode */
+html.light-mode .account-sidebar-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light-mode .account-user-name {
+    color: #0f172a !important;
+}
+
+html.light-mode .account-nav-link {
+    color: #475569 !important;
+}
+
+html.light-mode .account-nav-link:hover {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+}
+
+html.light-mode .voucher-page-title {
+    color: #0f172a !important;
+}
+
+html.light-mode .voucher-page-subtitle {
+    color: #64748b !important;
+}
+
+html.light-mode .voucher-input-card {
+    background: linear-gradient(to right, #f8fafc, #f1f5f9) !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light-mode .voucher-code-input {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+html.light-mode .voucher-code-input::placeholder {
+    color: #94a3b8 !important;
+}
+
+html.light-mode .voucher-stat-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03) !important;
+}
+
+html.light-mode .voucher-stat-number {
+    color: #0f172a !important;
+}
+
+html.light-mode .voucher-stat-label {
+    color: #64748b !important;
+}
+
+html.light-mode .voucher-tab-btn:not(.active) {
+    color: #475569 !important;
+}
+
+html.light-mode .voucher-tab-btn:not(.active):hover {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+}
+
+html.light-mode .voucher-tabs-bar {
+    border-color: #e2e8f0 !important;
+}
+
+html.light-mode .voucher-ticket-card {
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light-mode .voucher-ticket-card:hover {
+    border-color: #d4af37 !important;
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15) !important;
+}
+
+html.light-mode .voucher-ticket-card .bg-cinematic-dark {
+    background-color: #f1f5f9 !important;
+    border-color: #e2e8f0 !important;
+}
+
+html.light-mode .voucher-ticket-title {
+    color: #0f172a !important;
+}
+
+html.light-mode .voucher-ticket-desc {
+    color: #475569 !important;
+}
+
+html.light-mode .voucher-ticket-date {
+    color: #64748b !important;
+}
+
+html.light-mode .voucher-ticket-date strong {
+    color: #0f172a !important;
+}
+
+html.light-mode .voucher-promo-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light-mode .voucher-promo-card:hover {
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light-mode .voucher-promo-title {
+    color: #0f172a !important;
+}
+
+html.light-mode .voucher-promo-desc {
+    color: #475569 !important;
+}
+
+html.light-mode .voucher-empty-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+
+html.light-mode .voucher-empty-title {
+    color: #0f172a !important;
+}
+
+html.light-mode .voucher-empty-desc {
+    color: #64748b !important;
+}
+
+/* ========================================================
+   VOUCHER CODE BADGES & HIGHLIGHT BOXES (Light & Dark Mode)
+   ======================================================== */
+
+/* 1. Image Corner Badge */
+.voucher-card-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.375rem !important;
+    padding: 0.3rem 0.65rem !important;
+    border-radius: 0.5rem !important;
+    background: rgba(15, 23, 42, 0.95) !important;
+    border: 1px solid rgba(250, 204, 21, 0.6) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+}
+.voucher-card-badge .voucher-code-text {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-weight: 800 !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.08em !important;
+    color: #fef08a !important; /* Crisp Yellow-200 */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+.voucher-card-badge svg {
+    color: #facc15 !important;
+}
+
+html.light-mode .voucher-card-badge {
+    background: #0f172a !important;
+    border: 1px solid #f59e0b !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+html.light-mode .voucher-card-badge .voucher-code-text {
+    color: #fef08a !important;
+}
+html.light-mode .voucher-card-badge svg {
+    color: #fbbf24 !important;
+}
+
+/* 2. In-Card Dedicated Voucher Box (Prominent & Copyable) */
+.voucher-code-box {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.5rem !important;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: 0.75rem !important;
+    background: rgba(212, 175, 55, 0.1) !important;
+    border: 1.5px dashed rgba(212, 175, 55, 0.4) !important;
+    transition: all 0.2s ease !important;
+}
+.voucher-code-box:hover {
+    border-color: rgba(212, 175, 55, 0.7) !important;
+    background: rgba(212, 175, 55, 0.15) !important;
+}
+.voucher-code-label {
+    font-size: 0.6875rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: #cbd5e1 !important;
+}
+.voucher-code-pill {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-weight: 900 !important;
+    font-size: 0.875rem !important;
+    letter-spacing: 0.08em !important;
+    color: #fbbf24 !important;
+    user-select: all !important;
+}
+.voucher-copy-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+    padding: 0.35rem 0.65rem !important;
+    font-size: 0.6875rem !important;
+    font-weight: 700 !important;
+    border-radius: 0.5rem !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #f8fafc !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    white-space: nowrap !important;
+}
+.voucher-copy-btn:hover {
+    background: #e50914 !important;
+    border-color: #e50914 !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+}
+.voucher-copy-btn.copied {
+    background: #10b981 !important;
+    border-color: #10b981 !important;
+    color: #ffffff !important;
+}
+
+/* Light mode for In-Card Voucher Box */
+html.light-mode .voucher-code-box {
+    background: #fefce8 !important; /* Soft warm yellow/amber */
+    border: 1.5px dashed #f59e0b !important;
+}
+html.light-mode .voucher-code-label {
+    color: #78350f !important; /* Deep warm amber brown */
+}
+html.light-mode .voucher-code-pill {
+    color: #b45309 !important; /* Amber-700 - super distinct, bold & dark */
+}
+html.light-mode .voucher-copy-btn {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+}
+html.light-mode .voucher-copy-btn:hover {
+    background: #e50914 !important;
+    border-color: #e50914 !important;
+    color: #ffffff !important;
+}
+html.light-mode .voucher-copy-btn.copied {
+    background: #10b981 !important;
+    border-color: #10b981 !important;
+    color: #ffffff !important;
+}
+
+/* 3. Ticket Stub Code (Account / Vouchers Page) */
+.voucher-stub-code {
+    background: rgba(0, 0, 0, 0.45) !important;
+    color: #fef08a !important;
+    border: 1px solid rgba(254, 240, 138, 0.4) !important;
+}
+html.light-mode .voucher-stub-code {
+    background: #0f172a !important;
+    color: #fef08a !important;
+    border: 1px solid rgba(254, 240, 138, 0.4) !important;
+}
+
+/* 4. Tab 3 History Voucher Code */
+.voucher-history-code {
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.375rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+html.light-mode .voucher-history-code {
+    background: #f1f5f9 !important;
+    color: #334155 !important;
+    border-color: #cbd5e1 !important;
+}
+
+/* 5. Checkout Applied / Available Voucher Badges */
+.checkout-voucher-code {
+    font-family: ui-monospace, SFMono-Regular, monospace !important;
+    font-weight: 900 !important;
+    color: #fbbf24 !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    padding: 0.2rem 0.5rem !important;
+    border-radius: 0.375rem !important;
+    border: 1px solid rgba(251, 191, 36, 0.35) !important;
+}
+html.light-mode .checkout-voucher-code {
+    color: #92400e !important;
+    background: #fef3c7 !important;
+    border-color: #fcd34d !important;
+}
+
+/* 6. Checkout Voucher Selector & Cards */
+.checkout-v-tab-btn {
+    padding: 0.45rem 1rem !important;
+    border-radius: 0.75rem !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+}
+.checkout-v-tab-btn.active {
+    background: #e50914 !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 10px rgba(229, 9, 20, 0.4) !important;
+}
+.checkout-v-tab-btn:not(.active) {
+    color: #94a3b8 !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.checkout-v-tab-btn:not(.active):hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+}
+html.light-mode .checkout-v-tab-btn:not(.active) {
+    color: #475569 !important;
+    background: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+}
+html.light-mode .checkout-v-tab-btn:not(.active):hover {
+    color: #0f172a !important;
+    background: #e2e8f0 !important;
+}
+
+.checkout-voucher-item {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.875rem;
+    padding: 0.75rem 1rem;
+    transition: all 0.25s ease;
+}
+.checkout-voucher-item:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    background: rgba(255, 255, 255, 0.08);
+}
+html.light-mode .checkout-voucher-item {
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+}
+html.light-mode .checkout-voucher-item:hover {
+    border-color: #f59e0b !important;
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.1) !important;
+}
+html.light-mode .checkout-voucher-item h4 {
+    color: #0f172a !important;
+}
+html.light-mode .checkout-voucher-item p {
+    color: #64748b !important;
+}
+
+/* ========================================================
+   SHOWTIME SLOTS & MOVIE CARDS (/showtimes)
+   ======================================================== */
+.showtime-movie-card {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition: border-color 0.3s ease;
+}
+html.light-mode .showtime-movie-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+html.light-mode .showtime-movie-title {
+    color: #0f172a !important;
+}
+html.light-mode .showtime-movie-meta {
+    color: #64748b !important;
+}
+html.light-mode .showtime-cinema-title {
+    color: #0f172a !important;
+}
+html.light-mode .showtime-cinema-title svg {
+    color: #e50914 !important;
+}
+
+.showtime-slot-btn {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.6rem 1.1rem !important;
+    border-radius: 0.85rem !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+    transition: all 0.25s ease !important;
+    text-decoration: none !important;
+    min-width: 95px !important;
+    cursor: pointer !important;
+}
+.showtime-slot-btn .slot-date {
+    font-size: 0.6875rem !important;
+    font-weight: 600 !important;
+    color: #94a3b8 !important;
+    transition: color 0.2s ease !important;
+    margin-bottom: 2px !important;
+}
+.showtime-slot-btn .slot-time {
+    font-size: 1.125rem !important;
+    font-weight: 900 !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    color: #ffffff !important;
+    line-height: 1.25 !important;
+    transition: color 0.2s ease !important;
+}
+.showtime-slot-btn .slot-price {
+    font-size: 0.6875rem !important;
+    font-weight: 700 !important;
+    color: #fbbf24 !important;
+    transition: color 0.2s ease !important;
+    margin-top: 2px !important;
+}
+.showtime-slot-btn:hover {
+    background-color: #e50914 !important;
+    border-color: #e50914 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(229, 9, 20, 0.45) !important;
+}
+.showtime-slot-btn:hover .slot-date,
+.showtime-slot-btn:hover .slot-time,
+.showtime-slot-btn:hover .slot-price {
+    color: #ffffff !important;
+}
+
+/* Light mode for showtime slot buttons */
+html.light-mode .showtime-slot-btn {
+    background-color: #f8fafc !important;
+    border: 1.5px solid #cbd5e1 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+}
+html.light-mode .showtime-slot-btn .slot-date {
+    color: #64748b !important;
+}
+html.light-mode .showtime-slot-btn .slot-time {
+    color: #0f172a !important; /* Bold, high contrast dark slate */
+}
+html.light-mode .showtime-slot-btn .slot-price {
+    color: #b45309 !important; /* Rich amber cinema gold */
+}
+html.light-mode .showtime-slot-btn:hover {
+    background-color: #e50914 !important;
+    border-color: #e50914 !important;
+    box-shadow: 0 6px 20px rgba(229, 9, 20, 0.35) !important;
+}
+html.light-mode .showtime-slot-btn:hover .slot-date,
+html.light-mode .showtime-slot-btn:hover .slot-time,
+html.light-mode .showtime-slot-btn:hover .slot-price {
+    color: #ffffff !important;
+}
+
+/* ========================================================
+   HERO BANNER & CAROUSEL (welcome.blade.php & movies/show)
+   ======================================================== */
+.hero-backdrop-img {
+    filter: brightness(0.95);
+    transition: filter 0.3s ease;
+}
+
+.hero-dark-overlay {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    pointer-events: none !important;
+}
+
+.hero-gradient-overlay {
+    background: linear-gradient(
+        to top,
+        rgba(10, 10, 10, 1) 0%,
+        rgba(10, 10, 10, 0.8) 35%,
+        rgba(10, 10, 10, 0.2) 65%,
+        rgba(10, 10, 10, 0.5) 100%
+    ) !important;
+    pointer-events: none !important;
+}
+
+/* Light mode for Hero Banner: The backdrop image MUST be vibrant and visible */
+html.light-mode .hero-dark-overlay {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+html.light-mode .hero-gradient-overlay {
+    background: linear-gradient(
+        to top,
+        #f8fafc 0%,
+        rgba(248, 250, 252, 0.92) 8%,
+        rgba(10, 10, 10, 0.82) 28%,
+        rgba(10, 10, 10, 0.2) 60%,
+        rgba(0, 0, 0, 0.35) 100%
+    ) !important;
+}
+
+/* Ensure Hero Text stays crystal clear and white with strong contrast */
+html.light-mode .hero-slide h1,
+html.light-mode .hero-slide p,
+html.light-mode .hero-slide .text-white,
+html.light-mode .heroSwiper h1,
+html.light-mode .heroSwiper p,
+html.light-mode .heroSwiper .text-white {
+    color: #ffffff !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7) !important;
+}
+
+html.light-mode .hero-slide span.text-cinematic-gold,
+html.light-mode .heroSwiper span.text-cinematic-gold {
+    color: #fbbf24 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+html.light-mode .hero-slide span.text-gray-300,
+html.light-mode .heroSwiper span.text-gray-300 {
+    color: #e2e8f0 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Pagination bullets and nav buttons in Hero Banner */
+html.light-mode .heroSwiper .swiper-pagination-bullet {
+    background: rgba(15, 23, 42, 0.45) !important;
+}
+html.light-mode .heroSwiper .swiper-pagination-bullet-active {
+    background: #e50914 !important;
+    box-shadow: 0 0 12px rgba(229, 9, 20, 0.6) !important;
+}
+html.light-mode .heroSwiper .swiper-button-next,
+html.light-mode .heroSwiper .swiper-button-prev {
+    color: rgba(255, 255, 255, 0.8) !important;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6)) !important;
+}
+html.light-mode .heroSwiper .swiper-button-next:hover,
+html.light-mode .heroSwiper .swiper-button-prev:hover {
+    color: #ffffff !important;
+}
+
+
+
+
+

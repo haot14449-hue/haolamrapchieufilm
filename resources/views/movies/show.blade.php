@@ -5,13 +5,13 @@
 @section('content')
 <div class="bg-cinematic-dark min-h-screen">
     <!-- Hero Section (Giống trang chủ) -->
-    <div class="relative h-screen w-full">
+    <div class="relative h-screen w-full hero-slide">
         <!-- Backdrop Image -->
-        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ $movie->backdrop_url }}');"></div>
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-backdrop-img" style="background-image: url('{{ $movie->backdrop_url }}');"></div>
         
         <!-- Gradient Overlays -->
-        <div class="absolute inset-0 bg-black/30"></div>
-        <div class="absolute inset-0 bg-cinematic-gradient"></div>
+        <div class="absolute inset-0 hero-dark-overlay pointer-events-none"></div>
+        <div class="absolute inset-0 hero-gradient-overlay pointer-events-none"></div>
         
         <!-- Content -->
         <div class="relative z-10 h-full flex flex-col justify-end pb-32 px-6 md:px-16 max-w-7xl mx-auto">

@@ -21,8 +21,27 @@
 </div>
 
 <!-- Filter Bar -->
-<div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6">
+<div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6 space-y-4">
+    <!-- Quick Time Filter Tabs -->
+    <div class="flex flex-wrap items-center gap-2 border-b border-gray-100 pb-3">
+        <span class="text-xs font-bold text-gray-500 uppercase mr-1">Trạng thái:</span>
+        <a href="{{ request()->fullUrlWithQuery(['time_status' => 'all']) }}" 
+           class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all {{ ($timeStatus ?? 'all') === 'all' ? 'bg-gray-900 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
+            Tất cả ({{ $totalCount ?? $showtimes->count() }})
+        </a>
+        <a href="{{ request()->fullUrlWithQuery(['time_status' => 'upcoming']) }}" 
+           class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 {{ ($timeStatus ?? '') === 'upcoming' ? 'bg-green-600 text-white shadow-sm' : 'bg-green-50 text-green-700 hover:bg-green-100' }}">
+            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+            Sắp chiếu ({{ $upcomingCount ?? 0 }})
+        </a>
+        <a href="{{ request()->fullUrlWithQuery(['time_status' => 'past']) }}" 
+           class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all {{ ($timeStatus ?? '') === 'past' ? 'bg-gray-700 text-white shadow-sm' : 'bg-gray-100 text-gray-500 hover:bg-gray-200' }}">
+            Đã qua giờ ({{ $pastCount ?? 0 }})
+        </a>
+    </div>
+
     <form method="GET" action="{{ route('admin.showtimes.index') }}" class="flex flex-wrap items-center gap-3">
+        <input type="hidden" name="time_status" value="{{ $timeStatus ?? 'all' }}">
         <div class="flex-1 min-w-[200px]">
             <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Lọc theo Rạp</label>
             <select name="cinema_id" onchange="this.form.submit()" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-gray-900 focus:outline-none">
@@ -47,7 +66,7 @@
             </select>
         </div>
 
-        @if(request('cinema_id') || request('movie_id'))
+        @if(request('cinema_id') || request('movie_id') || (request('time_status') && request('time_status') !== 'all'))
         <div class="self-end pb-1">
             <a href="{{ route('admin.showtimes.index') }}" class="px-3 py-2 text-xs font-semibold text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition border border-gray-200">
                 ✕ Xóa lọc
@@ -63,6 +82,7 @@
             <thead class="bg-gray-50 text-gray-500">
                 <tr>
                     <th class="px-6 py-3 font-medium tracking-wider">Thời Gian</th>
+                    <th class="px-6 py-3 font-medium tracking-wider">Trạng Thái</th>
                     <th class="px-6 py-3 font-medium tracking-wider">Phim</th>
                     <th class="px-6 py-3 font-medium tracking-wider">Rạp & Phòng</th>
                     <th class="px-6 py-3 font-medium tracking-wider">Định dạng & Tiếng</th>
@@ -76,6 +96,35 @@
                     <td class="px-6 py-4">
                         <p class="font-bold text-gray-900">{{ \Carbon\Carbon::parse($showtime->start_time)->format('H:i') }}</p>
                         <p class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($showtime->start_time)->format('d/m/Y') }}</p>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        @php
+                            $startTime = \Carbon\Carbon::parse($showtime->start_time);
+                            $duration = (int)($showtime->movie->duration ?? 120);
+                            $endTime = $startTime->copy()->addMinutes($duration);
+                            $now = now();
+                            $isPast = $now->greaterThanOrEqualTo($endTime);
+                            $isLive = $now->greaterThanOrEqualTo($startTime) && $now->lessThan($endTime);
+                        @endphp
+                        @if($isLive)
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">
+                                <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+                                Đang chiếu
+                            </span>
+                        @elseif($isPast)
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-500 border border-gray-200">
+                                Đã kết thúc
+                            </span>
+                        @elseif($startTime->isPast())
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700 border border-orange-200">
+                                Quá giờ bắt đầu
+                            </span>
+                        @else
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 border border-green-200">
+                                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                Sắp chiếu
+                            </span>
+                        @endif
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900">
                         {{ $showtime->movie->title ?? 'N/A' }}

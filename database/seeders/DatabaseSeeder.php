@@ -109,8 +109,9 @@ class DatabaseSeeder extends Seeder
             ['code' => 'POINT500', 'title' => 'Đổi 500 điểm lấy voucher 50k', 'description' => 'Dành cho khách hàng thân thiết', 'discount_percent' => null, 'discount_amount' => 50000, 'points_required' => 500, 'start_date' => now(), 'end_date' => now()->addMonths(6), 'image_url' => 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'],
         ]);
 
-        // Seed Genres & Actors
+        // Seed Genres & Actors & More Movies
         $this->call(GenreSeeder::class);
         $this->call(ActorSeeder::class);
+        $this->call(MoreMoviesSeeder::class);
     }
 }
