@@ -343,6 +343,81 @@
                     @endforelse
                 </div>
             </div>
+
+            <!-- PHẦN 4: THIẾT LẬP TOP 10 PHIM HOT TRANG CHỦ -->
+            @php
+                $isTopHot = isset($movie) && $movie->topHot;
+                $topHotItem = $isTopHot ? $movie->topHot : null;
+            @endphp
+            <div class="border border-amber-200 bg-amber-50/40 rounded-xl p-6">
+                <input type="hidden" name="top_hot_submitted" value="1">
+                <div class="flex items-center justify-between pb-3 border-b border-amber-200/80 mb-4">
+                    <h3 class="text-base font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2">
+                        <span class="w-2.5 h-5 bg-amber-500 rounded"></span>
+                        Bảng Xếp Hạng Top 10 Phim Hot Trang Chủ
+                    </h3>
+                    <a href="{{ route('admin.top_movies.index') }}" target="_blank" class="text-xs font-semibold text-amber-800 hover:text-amber-900 underline flex items-center gap-1">
+                        Xem Bảng Top 10 Toàn Cục
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" name="is_in_top_hot" id="is_in_top_hot" value="1" 
+                            {{ old('is_in_top_hot', $isTopHot) ? 'checked' : '' }}
+                            onchange="document.getElementById('top-hot-fields').classList.toggle('hidden', !this.checked)"
+                            class="h-5 w-5 text-amber-600 rounded border-gray-300 focus:ring-amber-500 cursor-pointer">
+                        <label for="is_in_top_hot" class="text-sm font-bold text-gray-900 cursor-pointer select-none">
+                            🔥 Đưa bộ phim này vào Top 10 Phim Hot hôm nay trên Trang Chủ
+                        </label>
+                    </div>
+
+                    <div id="top-hot-fields" class="{{ old('is_in_top_hot', $isTopHot) ? '' : 'hidden' }} space-y-4 pt-3 border-t border-amber-200/50">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 mb-1">Thứ Hạng (Rank 1 - 10)</label>
+                                <select name="top_hot_rank" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-bold text-amber-600 focus:ring-2 focus:ring-amber-500 bg-white">
+                                    @for($i = 1; $i <= 10; $i++)
+                                        <option value="{{ $i }}" {{ old('top_hot_rank', $topHotItem->rank ?? 1) == $i ? 'selected' : '' }}>
+                                            Top #{{ $i }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 mb-1">Độ Tuổi (Hiển thị cùng thứ hạng)</label>
+                                <select name="top_hot_age_rating" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 bg-white">
+                                    <option value="P" {{ old('top_hot_age_rating', $topHotItem->age_rating ?? '') == 'P' ? 'selected' : '' }}>P (Mọi lứa tuổi)</option>
+                                    <option value="T13" {{ old('top_hot_age_rating', $topHotItem->age_rating ?? 'T13') == 'T13' ? 'selected' : '' }}>T13 (Trên 13 tuổi)</option>
+                                    <option value="T16" {{ old('top_hot_age_rating', $topHotItem->age_rating ?? '') == 'T16' ? 'selected' : '' }}>T16 (Trên 16 tuổi)</option>
+                                    <option value="T18" {{ old('top_hot_age_rating', $topHotItem->age_rating ?? '') == 'T18' ? 'selected' : '' }}>T18 (Trên 18 tuổi)</option>
+                                    <option value="C" {{ old('top_hot_age_rating', $topHotItem->age_rating ?? '') == 'C' ? 'selected' : '' }}>C (Cấm)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 mb-1">Tên Tiếng Anh / Subtitle</label>
+                                <input type="text" name="top_hot_sub_title" value="{{ old('top_hot_sub_title', $topHotItem->sub_title ?? '') }}" placeholder="VD: Against The Current" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 bg-white">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 mb-1">Nhãn Poster 1 (Góc dưới poster)</label>
+                                <input type="text" name="top_hot_badge_text" value="{{ old('top_hot_badge_text', $topHotItem->badge_text ?? 'PD. 30') }}" placeholder="VD: PD. 30, IMAX, 2D" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 mb-1">Nhãn Poster 2 (Màu xanh lá)</label>
+                                <input type="text" name="top_hot_badge_text_2" value="{{ old('top_hot_badge_text_2', $topHotItem->badge_text_2 ?? '') }}" placeholder="VD: TM. 16, 3D" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 bg-white">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="flex justify-end gap-4 mt-10 pt-6 border-t border-gray-100">

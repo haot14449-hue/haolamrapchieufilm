@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'pos' => \App\Http\Middleware\PosMiddleware::class,
         ]);
         $middleware->validateCsrfTokens(except: [
             'api/sepay/*',

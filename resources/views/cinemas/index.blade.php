@@ -41,6 +41,201 @@
     .cinema-scroll-list::-webkit-scrollbar-thumb:hover {
         background: rgba(255, 255, 255, 0.4);
     }
+
+    /* =========================================================================
+       CINEMA CARDS - DARK MODE (DEFAULT)
+       ========================================================================= */
+    .cinema-card {
+        background-color: #18181b;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #f4f4f5;
+    }
+    .cinema-card:hover {
+        border-color: rgba(249, 115, 22, 0.5);
+        background-color: #202024;
+    }
+    .cinema-card .cinema-name {
+        color: #ffffff;
+    }
+    .cinema-card .cinema-sub {
+        color: #9ca3af;
+    }
+    .cinema-card .cinema-card-actions {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .cinema-card .cinema-action-detail {
+        color: #eab308;
+    }
+    .cinema-card .cinema-action-detail:hover {
+        color: #ffffff;
+    }
+    .cinema-card .cinema-action-dir {
+        color: #9ca3af;
+    }
+    .cinema-card .cinema-action-dir:hover {
+        color: #ffffff;
+    }
+    .cinema-card .cinema-action-sep {
+        color: #4b5563;
+    }
+
+    /* Active Cinema Card in Dark Mode */
+    .cinema-card.is-active {
+        background-color: #221f1d !important;
+        border: 2px solid #f97316 !important;
+        box-shadow: 0 0 20px rgba(234, 88, 12, 0.25) !important;
+    }
+    .cinema-card.is-active .cinema-name {
+        color: #f97316 !important;
+    }
+    .cinema-card.is-active .cinema-sub {
+        color: #cbd5e1 !important;
+    }
+    .cinema-card.is-active .cinema-active-badge {
+        color: #f97316 !important;
+    }
+
+    /* =========================================================================
+       CINEMA SYSTEM IN LIGHT MODE (Complete High-Contrast & Readability Fix)
+       ========================================================================= */
+    html.light-mode .cinema-scroll-list {
+        background-color: transparent !important;
+    }
+    html.light-mode .cinema-scroll-list::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05) !important;
+    }
+    html.light-mode .cinema-scroll-list::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2) !important;
+    }
+    html.light-mode .cinema-scroll-list::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 0, 0, 0.35) !important;
+    }
+
+    /* Inactive Cinema Cards in Light Mode */
+    html.light-mode .cinema-card {
+        background-color: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+        color: #0f172a !important;
+    }
+    html.light-mode .cinema-card:hover {
+        background-color: #fffaf5 !important;
+        border-color: #fdba74 !important;
+        box-shadow: 0 4px 14px rgba(249, 115, 22, 0.12) !important;
+    }
+    html.light-mode .cinema-card .cinema-name {
+        color: #0f172a !important;
+        font-weight: 700 !important;
+    }
+    html.light-mode .cinema-card:hover .cinema-name {
+        color: #ea580c !important;
+    }
+    html.light-mode .cinema-card .cinema-sub {
+        color: #64748b !important;
+    }
+    html.light-mode .cinema-card .cinema-card-actions {
+        border-top: 1px solid #f1f5f9 !important;
+    }
+    html.light-mode .cinema-card .cinema-action-detail {
+        color: #ea580c !important;
+        font-weight: 700 !important;
+    }
+    html.light-mode .cinema-card .cinema-action-detail:hover {
+        color: #c2410c !important;
+    }
+    html.light-mode .cinema-card .cinema-action-dir {
+        color: #64748b !important;
+        font-weight: 500 !important;
+    }
+    html.light-mode .cinema-card .cinema-action-dir:hover {
+        color: #0f172a !important;
+    }
+    html.light-mode .cinema-card .cinema-action-sep {
+        color: #cbd5e1 !important;
+    }
+
+    /* ACTIVE Cinema Card in Light Mode - High Contrast Warm Amber/Ivory */
+    html.light-mode .cinema-card.is-active {
+        background-color: #fff7ed !important; /* Soft warm ivory amber tone */
+        border: 2px solid #ea580c !important; /* Bold cinema orange border */
+        box-shadow: 0 6px 24px rgba(234, 88, 12, 0.18) !important;
+    }
+    html.light-mode .cinema-card.is-active .cinema-name {
+        color: #c2410c !important; /* Vivid deep cinema orange, 100% sharp and readable */
+        font-weight: 800 !important;
+    }
+    html.light-mode .cinema-card.is-active .cinema-sub {
+        color: #334155 !important; /* Slate-700, perfect contrast */
+        font-weight: 500 !important;
+    }
+    html.light-mode .cinema-card.is-active .cinema-active-badge {
+        color: #ea580c !important;
+        font-weight: 700 !important;
+    }
+    html.light-mode .cinema-card.is-active .cinema-card-actions {
+        border-top: 1px solid #fed7aa !important;
+    }
+    html.light-mode .cinema-card.is-active .cinema-action-detail {
+        color: #c2410c !important;
+        font-weight: 800 !important;
+    }
+    html.light-mode .cinema-card.is-active .cinema-action-dir {
+        color: #475569 !important;
+        font-weight: 600 !important;
+    }
+    html.light-mode .cinema-card.is-active .cinema-action-sep {
+        color: #fdba74 !important;
+    }
+
+    /* City Filter Buttons in Light Mode */
+    html.light-mode .city-btn.active {
+        background-color: #ea580c !important;
+        border-color: #ea580c !important;
+        color: #ffffff !important;
+        box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3) !important;
+    }
+    html.light-mode .city-btn:not(.active) {
+        background-color: #ffffff !important;
+        border-color: #e2e8f0 !important;
+        color: #475569 !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.light-mode .city-btn:not(.active):hover {
+        background-color: #fff7ed !important;
+        border-color: #ea580c !important;
+        color: #ea580c !important;
+    }
+
+    /* Recenter button in Light Mode */
+    html.light-mode #btn-recenter {
+        background-color: #ffffff !important;
+        border-color: #cbd5e1 !important;
+        color: #1e293b !important;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) !important;
+    }
+    html.light-mode #btn-recenter:hover {
+        background-color: #fff7ed !important;
+        border-color: #ea580c !important;
+        color: #ea580c !important;
+    }
+
+    /* Cinema Map Canvas Wrapper in Light Mode */
+    html.light-mode .cinema-map-wrapper {
+        background-color: #ffffff !important;
+        border-color: #e2e8f0 !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    /* Map Overlay Legend in Light Mode */
+    html.light-mode .map-overlay-badge {
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        border-color: #e2e8f0 !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+    }
+    html.light-mode .map-overlay-badge span.text-gray-200 {
+        color: #1e293b !important;
+        font-weight: 600 !important;
+    }
 </style>
 
 <div class="pt-24 pb-16 bg-cinematic-dark min-h-screen">
@@ -101,7 +296,7 @@
                 <!-- Cinema Cards List -->
                 <div class="cinema-scroll-list space-y-3.5 overflow-y-auto pr-1.5" style="max-height: 640px;">
                     @foreach($cinemas as $index => $cinema)
-                    <div class="cinema-card relative rounded-xl p-4 transition-all duration-300 cursor-pointer {{ $index === 0 ? 'bg-[#221f1d] border-2 border-orange-500 shadow-[0_0_20px_rgba(234,88,12,0.25)]' : 'bg-[#18181b] border border-white/10 hover:border-orange-500/50 hover:bg-[#202024]' }}"
+                    <div class="cinema-card relative rounded-xl p-4 transition-all duration-300 cursor-pointer {{ $index === 0 ? 'is-active bg-[#221f1d] border-2 border-orange-500 shadow-[0_0_20px_rgba(234,88,12,0.25)]' : 'bg-[#18181b] border border-white/10 hover:border-orange-500/50 hover:bg-[#202024]' }}"
                          id="card-cinema-{{ $cinema->id }}"
                          data-id="{{ $cinema->id }}"
                          data-name="{{ $cinema->name }}"
@@ -130,18 +325,18 @@
                         </div>
 
                         <!-- Action buttons -->
-                        <div class="flex items-center gap-3 mt-3 pt-3 border-t border-white/5 text-xs">
+                        <div class="cinema-card-actions flex items-center gap-3 mt-3 pt-3 border-t border-white/5 text-xs">
                             <a href="{{ route('cinemas.show', $cinema->id) }}" 
-                               class="text-cinematic-gold hover:text-white font-semibold transition-colors flex items-center gap-1"
+                               class="cinema-action-detail text-cinematic-gold hover:text-white font-semibold transition-colors flex items-center gap-1"
                                onclick="event.stopPropagation();">
                                 <span>Xem chi tiết</span>
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                             </a>
-                            <span class="text-gray-600">|</span>
+                            <span class="cinema-action-sep text-gray-600">|</span>
                             <a href="https://www.google.com/maps/dir/?api=1&destination={{ $cinema->latitude }},{{ $cinema->longitude }}" 
                                target="_blank" 
                                rel="noopener"
-                               class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"
+                               class="cinema-action-dir text-gray-400 hover:text-white transition-colors flex items-center gap-1"
                                onclick="event.stopPropagation();">
                                 <svg class="w-3.5 h-3.5 text-orange-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
                                 <span>Chỉ đường</span>
@@ -169,7 +364,7 @@
                 </div>
 
                 <!-- Interactive Map Canvas Container -->
-                <div class="relative w-full h-[480px] sm:h-[540px] lg:h-[640px] rounded-2xl overflow-hidden border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.7)] bg-[#18181b]">
+                <div class="cinema-map-wrapper relative w-full h-[480px] sm:h-[540px] lg:h-[640px] rounded-2xl overflow-hidden border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.7)] bg-[#18181b]">
                     <div id="cinema-map" class="w-full h-full z-10"></div>
 
                     <!-- Overlay Legend Card -->
@@ -286,6 +481,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = parseInt(card.dataset.id);
             const isCur = (id === cinema.id);
 
+            card.classList.toggle('is-active', isCur);
             card.classList.toggle('border-orange-500', isCur);
             card.classList.toggle('border-2', isCur);
             card.classList.toggle('bg-[#221f1d]', isCur);

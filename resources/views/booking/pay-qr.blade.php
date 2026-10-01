@@ -3,6 +3,195 @@
 @section('title', 'Thanh Toán Quét Mã QR MB Bank - HCTV')
 
 @section('content')
+<style>
+    /* High-contrast and Light Mode Styles for Pay QR Page */
+    html.light-mode .qr-card-box {
+        background-color: #ffffff !important;
+        border-color: #e2e8f0 !important;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.light-mode .qr-page-title {
+        color: #0f172a !important;
+    }
+    html.light-mode .qr-page-subtitle {
+        color: #334155 !important;
+        font-weight: 500 !important;
+    }
+    html.light-mode .qr-bank-info-title {
+        color: #0f172a !important;
+        font-weight: 800 !important;
+    }
+    html.light-mode .qr-bank-label {
+        color: #334155 !important;
+        font-weight: 700 !important;
+    }
+    html.light-mode .qr-bank-name {
+        color: #0f172a !important;
+        font-weight: 800 !important;
+    }
+    html.light-mode .qr-info-row {
+        background-color: #f8fafc !important;
+        border-color: #cbd5e1 !important;
+    }
+    html.light-mode .qr-info-row:hover {
+        border-color: #2563eb !important;
+        background-color: #f1f5f9 !important;
+    }
+    html.light-mode .qr-info-label {
+        color: #334155 !important;
+        font-weight: 700 !important;
+        font-size: 0.75rem !important;
+    }
+    html.light-mode .qr-info-value {
+        color: #0f172a !important;
+        font-weight: 900 !important;
+    }
+    html.light-mode .qr-bank-sub {
+        color: #1e293b !important;
+        font-weight: 700 !important;
+    }
+    html.light-mode .qr-info-value-gold {
+        color: #b45309 !important;
+        font-weight: 900 !important;
+    }
+    
+    /* Nút Sao Chép Số Tài Khoản trong Light Mode - Đậm, sắc nét */
+    html.light-mode .qr-copy-account-btn {
+        background-color: #2563eb !important;
+        color: #ffffff !important;
+        border-color: #1d4ed8 !important;
+        font-weight: 700 !important;
+        box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3) !important;
+    }
+    html.light-mode .qr-copy-account-btn:hover {
+        background-color: #1d4ed8 !important;
+        color: #ffffff !important;
+    }
+    html.light-mode .qr-copy-account-btn svg {
+        color: #ffffff !important;
+    }
+
+    /* Nút Sao Chép Số Tiền trong Light Mode - Đậm, sắc nét */
+    html.light-mode .qr-copy-amount-btn {
+        background-color: #f59e0b !important;
+        color: #000000 !important;
+        border-color: #d97706 !important;
+        font-weight: 800 !important;
+        box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3) !important;
+    }
+    html.light-mode .qr-copy-amount-btn:hover {
+        background-color: #d97706 !important;
+        color: #ffffff !important;
+    }
+    html.light-mode .qr-copy-amount-btn svg {
+        color: #000000 !important;
+    }
+    html.light-mode .qr-copy-amount-btn:hover svg {
+        color: #ffffff !important;
+    }
+
+    /* Khối Nội Dung Chuyển Khoản */
+    html.light-mode .qr-transfer-box {
+        background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%) !important;
+        border: 2px solid #2563eb !important;
+        box-shadow: 0 4px 16px rgba(37, 99, 235, 0.15) !important;
+    }
+    html.light-mode .qr-transfer-label {
+        color: #1e3a8a !important;
+        font-weight: 800 !important;
+    }
+    html.light-mode .qr-transfer-code {
+        color: #b45309 !important;
+        font-weight: 900 !important;
+    }
+    html.light-mode .qr-transfer-note {
+        color: #1e293b !important;
+        font-weight: 600 !important;
+    }
+    html.light-mode .qr-transfer-bold {
+        color: #000000 !important;
+        font-weight: 900 !important;
+    }
+
+    /* Khối Đang Chờ Quét Mã */
+    html.light-mode .qr-waiting-box {
+        background-color: #eff6ff !important;
+        border-color: #93c5fd !important;
+    }
+    html.light-mode .qr-waiting-text {
+        color: #1e3a8a !important;
+        font-weight: 700 !important;
+    }
+
+    /* Nút Tải Ảnh QR & Copy Cú Pháp */
+    html.light-mode .qr-btn-action {
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+        border-color: #cbd5e1 !important;
+        font-weight: 700 !important;
+    }
+    html.light-mode .qr-btn-action:hover {
+        background-color: #f1f5f9 !important;
+        border-color: #94a3b8 !important;
+    }
+    html.light-mode .qr-btn-copy {
+        background-color: #2563eb !important;
+        color: #ffffff !important;
+        border-color: #1d4ed8 !important;
+        font-weight: 700 !important;
+    }
+    html.light-mode .qr-btn-copy:hover {
+        background-color: #1d4ed8 !important;
+    }
+
+    /* Khối Hướng Dẫn */
+    html.light-mode .qr-instructions {
+        border-color: #e2e8f0 !important;
+        color: #1e293b !important;
+    }
+    html.light-mode .qr-instructions p {
+        color: #334155 !important;
+        font-weight: 500 !important;
+    }
+    html.light-mode .qr-instructions strong {
+        color: #0f172a !important;
+        font-weight: 700 !important;
+    }
+
+    /* Tóm Tắt Đơn Hàng */
+    html.light-mode .qr-summary-title {
+        color: #0f172a !important;
+        font-weight: 800 !important;
+    }
+    html.light-mode .qr-summary-movie-title {
+        color: #0f172a !important;
+        font-weight: 800 !important;
+    }
+    html.light-mode .qr-summary-cinema {
+        color: #475569 !important;
+        font-weight: 600 !important;
+    }
+    html.light-mode .qr-summary-time {
+        color: #b45309 !important;
+        font-weight: 700 !important;
+    }
+    html.light-mode .qr-summary-label {
+        color: #475569 !important;
+        font-weight: 700 !important;
+    }
+    html.light-mode .qr-summary-seats {
+        color: #b45309 !important;
+        font-weight: 800 !important;
+    }
+    html.light-mode .qr-summary-total-label {
+        color: #0f172a !important;
+        font-weight: 800 !important;
+    }
+    html.light-mode .qr-summary-total-val {
+        color: #b45309 !important;
+        font-weight: 900 !important;
+    }
+</style>
 <div class="pt-24 pb-16 bg-cinematic-dark min-h-screen text-white">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-12">
         
@@ -134,7 +323,7 @@
                             </div>
                             <button type="button" 
                                     onclick="copyToClipboard('{{ $bankAccount }}', 'Đã sao chép số tài khoản!')" 
-                                    class="px-3 py-1.5 bg-blue-600/30 hover:bg-blue-600 text-blue-300 hover:text-white rounded-lg text-xs font-semibold transition border border-blue-500/30 flex items-center gap-1.5">
+                                    class="qr-copy-account-btn px-3 py-1.5 bg-blue-600/30 hover:bg-blue-600 text-blue-300 hover:text-white rounded-lg text-xs font-semibold transition border border-blue-500/30 flex items-center gap-1.5">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -157,7 +346,7 @@
                             </div>
                             <button type="button" 
                                     onclick="copyToClipboard('{{ (int)$booking->total_price }}', 'Đã sao chép số tiền!')" 
-                                    class="px-3 py-1.5 bg-yellow-500/20 hover:bg-yellow-500 text-yellow-300 hover:text-black rounded-lg text-xs font-semibold transition border border-yellow-500/30 flex items-center gap-1.5">
+                                    class="qr-copy-amount-btn px-3 py-1.5 bg-yellow-500/20 hover:bg-yellow-500 text-yellow-300 hover:text-black rounded-lg text-xs font-semibold transition border border-yellow-500/30 flex items-center gap-1.5">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                                 <span>Sao chép số tiền</span>
                             </button>

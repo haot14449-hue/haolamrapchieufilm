@@ -46,8 +46,9 @@ Route::get('/cinemas/{id}', [CinemaController::class, 'show'])->name('cinemas.sh
 // 12. Khuyến mãi
 Route::get('/promotions', [PromotionController::class, 'index'])->name('promotions.index');
 
-// 06. Lịch chiếu tổng hợp
+// 06. Lịch chiếu tổng hợp & Trạng thái ghế real-time
 Route::get('/showtimes', [BookingController::class, 'showtimes'])->name('showtimes');
+Route::get('/booking/seats/{showtime_id}/status', [BookingController::class, 'getSeatStatus'])->name('booking.seat_status');
 
 // Booking Flow (Requires Login)
 Route::middleware('auth')->group(function () {
@@ -81,8 +82,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/account/vouchers/save', [AccountController::class, 'saveVoucher'])->name('account.vouchers.save');
     Route::delete('/account/vouchers/{id}', [AccountController::class, 'removeVoucher'])->name('account.vouchers.remove');
 
-    // Mặc định login redirect to dashboard -> đổi sang home
+    // Mặc định login redirect to dashboard
     Route::get('/dashboard', function () {
+        if (auth()->check()) {
+            if (auth()->user()->isAdmin()) {
+                return redirect()->route('admin.dashboard');
+            }
+            if (auth()->user()->isStaff()) {
+                return redirect()->route('pos.index');
+            }
+        }
         return redirect()->route('home');
     })->name('dashboard');
 
@@ -95,9 +104,20 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', fn() => redirect()->route('admin.dashboard'));
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     
     Route::resource('movies', \App\Http\Controllers\Admin\MovieController::class);
+    
+    // Quản lý Top 10 Phim Hot Trang Chủ
+    Route::get('top-movies', [\App\Http\Controllers\Admin\TopHotMovieController::class, 'index'])->name('top_movies.index');
+    Route::post('top-movies', [\App\Http\Controllers\Admin\TopHotMovieController::class, 'store'])->name('top_movies.store');
+    Route::put('top-movies/{topMovie}', [\App\Http\Controllers\Admin\TopHotMovieController::class, 'update'])->name('top_movies.update');
+    Route::delete('top-movies/{topMovie}', [\App\Http\Controllers\Admin\TopHotMovieController::class, 'destroy'])->name('top_movies.destroy');
+    Route::post('top-movies/move-rank', [\App\Http\Controllers\Admin\TopHotMovieController::class, 'moveRank'])->name('top_movies.move_rank');
+    Route::post('top-movies/auto-populate', [\App\Http\Controllers\Admin\TopHotMovieController::class, 'autoPopulate'])->name('top_movies.auto_populate');
+    Route::post('top-movies/{topMovie}/toggle', [\App\Http\Controllers\Admin\TopHotMovieController::class, 'toggleActive'])->name('top_movies.toggle');
+
     Route::resource('genres', \App\Http\Controllers\Admin\GenreController::class);
     Route::resource('cinemas', \App\Http\Controllers\Admin\CinemaController::class);
     // Phòng chiếu & Thiết kế sơ đồ ghế (Room & Seat Grid Designer)
@@ -115,6 +135,22 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('foods', \App\Http\Controllers\Admin\FoodController::class);
     Route::resource('promotions', \App\Http\Controllers\Admin\PromotionController::class);
     Route::resource('bookings', \App\Http\Controllers\Admin\BookingController::class)->only(['index', 'show', 'update']);
+
+    // Quản lý Tài Khoản (Admin quản lý nhân viên & người dùng)
+    Route::patch('users/{user}/password', [\App\Http\Controllers\Admin\UserController::class, 'updatePassword'])->name('users.password.update');
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+});
+
+// Bán Vé Trực Tiếp Tại Quầy (POS) cho Nhân viên & Admin
+Route::middleware(['auth', 'pos'])->prefix('pos')->name('pos.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\PosController::class, 'index'])->name('index');
+    Route::get('/lookup-customer', [\App\Http\Controllers\PosController::class, 'lookupCustomer'])->name('lookup_customer');
+    Route::get('/showtimes', [\App\Http\Controllers\PosController::class, 'getShowtimes'])->name('showtimes');
+    Route::get('/showtime-seats/{id}', [\App\Http\Controllers\PosController::class, 'getShowtimeSeats'])->name('showtime_seats');
+    Route::post('/hold-seats', [\App\Http\Controllers\PosController::class, 'holdSeats'])->name('hold_seats');
+    Route::post('/release-hold', [\App\Http\Controllers\PosController::class, 'releaseHold'])->name('release_hold');
+    Route::post('/checkout', [\App\Http\Controllers\PosController::class, 'checkout'])->name('checkout');
+    Route::get('/print/{booking_id}', [\App\Http\Controllers\PosController::class, 'printTicket'])->name('print');
 });
 
 require __DIR__.'/auth.php';

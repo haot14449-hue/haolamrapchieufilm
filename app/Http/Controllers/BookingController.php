@@ -14,6 +14,7 @@ use App\Mail\TicketConfirmationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
@@ -36,19 +37,76 @@ class BookingController extends Controller
         return $price;
     }
 
-    public function showtimes()
+    public function showtimes(Request $request)
     {
-        $now = now();
-        // Only fetch movies that have upcoming showtimes, and only eager load future showtimes
-        $movies = Movie::whereHas('showtimes', function ($query) use ($now) {
-            $query->where('start_time', '>=', $now);
-        })->with(['showtimes' => function ($query) use ($now) {
-            $query->where('start_time', '>=', $now)
-                  ->with(['room.cinema'])
-                  ->orderBy('start_time', 'asc');
-        }])->get();
+        $this->cleanupExpiredBookings();
 
-        return view('booking.showtimes', compact('movies'));
+        $cinemas = Cinema::orderBy('name')->get();
+        $selectedCinemaId = $request->input('cinema_id');
+
+        // Next 7 days
+        $dates = [];
+        for ($i = 0; $i < 7; $i++) {
+            $d = Carbon::today()->addDays($i);
+            $dates[] = [
+                'date' => $d->format('Y-m-d'),
+                'day_name' => $i === 0 ? 'Hôm nay' : ($i === 1 ? 'Ngày mai' : 'Thứ ' . ($d->dayOfWeek === 0 ? 'CN' : $d->dayOfWeek + 1)),
+                'formatted' => $d->format('d/m'),
+            ];
+        }
+
+        $selectedDate = $request->input('date', Carbon::today()->format('Y-m-d'));
+
+        $query = Showtime::query()
+            ->whereDate('start_time', $selectedDate)
+            ->with(['movie', 'room.cinema'])
+            ->orderBy('start_time', 'asc');
+
+        if (!empty($selectedCinemaId)) {
+            $query->whereHas('room', function ($q) use ($selectedCinemaId) {
+                $q->where('cinema_id', $selectedCinemaId);
+            });
+        }
+
+        // Active buffer: if today, show showtimes that haven't ended (start_time >= now()->subHours(4))
+        if ($selectedDate === Carbon::today()->format('Y-m-d')) {
+            $query->where('start_time', '>=', now()->subHours(4));
+        }
+
+        $showtimes = $query->get();
+
+        // Calculate available seats and started status
+        foreach ($showtimes as $st) {
+            $totalSeats = $st->room->total_seats ?? $st->room->seats()->count();
+            $bookedSeatsCount = Ticket::where('status', '!=', 'cancelled')
+                ->whereHas('booking', fn($b) => $b->where('showtime_id', $st->id)->where('status', '!=', 'cancelled'))
+                ->count();
+            $st->available_seats = max(0, $totalSeats - $bookedSeatsCount);
+            $st->is_started = Carbon::parse($st->start_time)->isPast();
+        }
+
+        // Group by movie
+        $grouped = [];
+        foreach ($showtimes as $st) {
+            $movieId = $st->movie_id;
+            if (!isset($grouped[$movieId])) {
+                $grouped[$movieId] = [
+                    'movie' => $st->movie,
+                    'showtimes' => [],
+                ];
+            }
+            $grouped[$movieId]['showtimes'][] = $st;
+        }
+
+        $movies = array_values($grouped);
+
+        return view('booking.showtimes', compact(
+            'movies',
+            'cinemas',
+            'selectedCinemaId',
+            'dates',
+            'selectedDate'
+        ));
     }
 
     /**
@@ -79,6 +137,25 @@ class BookingController extends Controller
             })->pluck('seat_id')->toArray();
 
         return view('booking.seats', compact('showtime', 'bookedSeatIds'));
+    }
+
+    /**
+     * Real-time seat status polling for online seat selection.
+     */
+    public function getSeatStatus($showtime_id)
+    {
+        $this->cleanupExpiredBookings($showtime_id);
+
+        $bookedSeatIds = Ticket::where('status', '!=', 'cancelled')
+            ->whereHas('booking', function ($query) use ($showtime_id) {
+                $query->where('showtime_id', $showtime_id)
+                      ->where('status', '!=', 'cancelled');
+            })->pluck('seat_id')->toArray();
+
+        return response()->json([
+            'success' => true,
+            'booked_seats' => $bookedSeatIds,
+        ]);
     }
 
     public function processSeats(Request $request, $showtime_id)

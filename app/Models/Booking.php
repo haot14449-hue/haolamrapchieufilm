@@ -21,6 +21,8 @@ class Booking extends Model
             'points_earned' => 'integer',
             'points_processed' => 'boolean',
             'expires_at' => 'datetime',
+            'cash_given' => 'decimal:2',
+            'cash_change' => 'decimal:2',
         ];
     }
 
@@ -101,6 +103,11 @@ class Booking extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function cashier()
+    {
+        return $this->belongsTo(User::class, 'cashier_id');
     }
 
     public function foods()

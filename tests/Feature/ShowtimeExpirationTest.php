@@ -78,7 +78,7 @@ class ShowtimeExpirationTest extends TestCase
         $pastShowtime = Showtime::create([
             'movie_id' => $movie->id,
             'room_id' => $room->id,
-            'start_time' => now()->subMinutes(30),
+            'start_time' => now()->subHours(5),
             'price' => 90000,
         ]);
 
@@ -98,7 +98,7 @@ class ShowtimeExpirationTest extends TestCase
         $pastShowtime = Showtime::create([
             'movie_id' => $movie->id,
             'room_id' => $room->id,
-            'start_time' => now()->subMinutes(15),
+            'start_time' => now()->subHours(5),
             'price' => 90000,
         ]);
 
@@ -123,7 +123,7 @@ class ShowtimeExpirationTest extends TestCase
         $pastShowtime = Showtime::create([
             'movie_id' => $movie->id,
             'room_id' => $room->id,
-            'start_time' => now()->subMinutes(10),
+            'start_time' => now()->subHours(5),
             'price' => 90000,
         ]);
 

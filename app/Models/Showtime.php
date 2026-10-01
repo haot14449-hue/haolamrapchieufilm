@@ -33,31 +33,39 @@ class Showtime extends Model
     }
 
     /**
-     * Scope to filter showtimes that have not yet started.
+     * Scope to filter showtimes that have not yet ended (up to 4 hours after start time).
      */
     public function scopeUpcoming($query)
     {
-        return $query->where('start_time', '>=', now());
+        return $query->where('start_time', '>=', now()->subHours(4));
     }
 
     /**
-     * Scope to filter showtimes that have already passed.
+     * Scope to filter showtimes that have already passed (more than 4 hours ago).
      */
     public function scopePast($query)
     {
-        return $query->where('start_time', '<', now());
+        return $query->where('start_time', '<', now()->subHours(4));
     }
 
     /**
-     * Check if this showtime has already passed.
+     * Check if this showtime has already passed its active booking window (4 hours buffer).
      */
     public function isPast(): bool
+    {
+        return \Carbon\Carbon::parse($this->start_time)->addHours(4)->isPast();
+    }
+
+    /**
+     * Check if this showtime has already started.
+     */
+    public function isStarted(): bool
     {
         return \Carbon\Carbon::parse($this->start_time)->isPast();
     }
 
     /**
-     * Check if this showtime is still upcoming.
+     * Check if this showtime is still upcoming or active.
      */
     public function isUpcoming(): bool
     {

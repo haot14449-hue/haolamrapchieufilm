@@ -13,7 +13,7 @@ class MovieController extends Controller
 {
     public function index()
     {
-        $movies = Movie::withCount('actors')->orderBy('created_at', 'desc')->get();
+        $movies = Movie::withCount('actors')->with('topHot')->orderBy('created_at', 'desc')->get();
         return view('admin.movies.index', compact('movies'));
     }
 
@@ -82,12 +82,15 @@ class MovieController extends Controller
         // Process Actors
         $this->saveActors($request, $movie);
 
+        // Process Top 10 Phim Hot
+        $this->saveTopHot($request, $movie);
+
         return redirect()->route('admin.movies.index')->with('success', 'Thêm phim mới thành công!');
     }
 
     public function edit(Movie $movie)
     {
-        $movie->load('actors');
+        $movie->load(['actors', 'topHot']);
         $genres = Genre::orderBy('name', 'asc')->get();
         return view('admin.movies.form', compact('movie', 'genres'));
     }
@@ -141,6 +144,9 @@ class MovieController extends Controller
 
         // Process Actors
         $this->saveActors($request, $movie);
+
+        // Process Top 10 Phim Hot
+        $this->saveTopHot($request, $movie);
 
         return redirect()->route('admin.movies.index')->with('success', 'Cập nhật phim thành công!');
     }
@@ -226,5 +232,28 @@ class MovieController extends Controller
 
         // Remove actors that were removed from the form
         $movie->actors()->whereNotIn('id', $retainedIds)->delete();
+    }
+
+    /**
+     * Save or sync Top 10 Hot status for movie.
+     */
+    private function saveTopHot(Request $request, Movie $movie): void
+    {
+        if ($request->boolean('is_in_top_hot')) {
+            $rank = (int) $request->input('top_hot_rank', 1);
+            \App\Models\TopHotMovie::updateOrCreate(
+                ['movie_id' => $movie->id],
+                [
+                    'rank' => $rank,
+                    'sub_title' => $request->input('top_hot_sub_title'),
+                    'badge_text' => $request->input('top_hot_badge_text'),
+                    'badge_text_2' => $request->input('top_hot_badge_text_2'),
+                    'age_rating' => $request->input('top_hot_age_rating', 'T13'),
+                    'is_active' => true,
+                ]
+            );
+        } elseif ($request->has('top_hot_submitted')) {
+            \App\Models\TopHotMovie::where('movie_id', $movie->id)->delete();
+        }
     }
 }

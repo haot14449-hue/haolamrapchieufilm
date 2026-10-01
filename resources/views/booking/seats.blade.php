@@ -107,6 +107,7 @@
                                                             $seatPrice = $showtime->price;
                                                             if ($type === 'vip') $seatPrice += 20000;
                                                             elseif ($type === 'deluxe') $seatPrice += 30000;
+                                                            elseif ($type === 'sweetbox') $seatPrice += 40000;
 
                                                             // Base styling
                                                             $typeColor = 'seat-standard bg-white/10 text-white border-white/20 hover:bg-white/25';
@@ -215,7 +216,7 @@
                         <p id="totalPriceLabel" class="text-3xl font-bold text-cinematic-gold mt-1">0 VNĐ</p>
                     </div>
                     
-                    <button type="button" onclick="document.getElementById('seatsForm').submit()" class="w-full py-4 bg-cinematic-red text-white font-bold rounded shadow-[0_0_15px_rgba(229,9,20,0.4)] hover:bg-red-700 transition-colors uppercase tracking-wider">
+                    <button type="button" id="btnContinue" class="w-full py-4 bg-cinematic-red text-white font-bold rounded shadow-[0_0_15px_rgba(229,9,20,0.4)] hover:bg-red-700 transition-colors uppercase tracking-wider">
                         Tiếp tục
                     </button>
                 </div>
@@ -224,18 +225,40 @@
     </div>
 </div>
 
+<!-- Real-time Conflict Alert Toast -->
+<div id="seatConflictToast" class="fixed bottom-6 right-6 z-50 hidden max-w-md bg-amber-500/90 text-slate-950 font-bold px-5 py-4 rounded-xl shadow-2xl backdrop-blur-md border border-amber-300 transition-all duration-300 flex items-start gap-3">
+    <svg class="w-6 h-6 shrink-0 text-slate-950 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <div>
+        <p class="text-xs uppercase tracking-wider font-black">Thông báo đồng bộ ghế</p>
+        <p id="seatConflictToastText" class="text-sm font-semibold mt-0.5"></p>
+    </div>
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const checkboxes = document.querySelectorAll('.seat-checkbox:not(:disabled)');
+        const checkboxes = document.querySelectorAll('.seat-checkbox');
         const selectedSeatsLabel = document.getElementById('selectedSeatsLabel');
         const totalPriceLabel = document.getElementById('totalPriceLabel');
+        const btnContinue = document.getElementById('btnContinue');
+        const toast = document.getElementById('seatConflictToast');
+        const toastText = document.getElementById('seatConflictToastText');
+        let toastTimeout = null;
+
+        function showToast(message) {
+            toastText.textContent = message;
+            toast.classList.remove('hidden');
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 6000);
+        }
         
         function updateSummary() {
             let selected = [];
             let total = 0;
             
             checkboxes.forEach(cb => {
-                if (cb.checked) {
+                if (cb.checked && !cb.disabled) {
                     selected.push(cb.dataset.label);
                     total += parseFloat(cb.dataset.price);
                 }
@@ -253,6 +276,60 @@
         checkboxes.forEach(cb => {
             cb.addEventListener('change', updateSummary);
         });
+
+        if (btnContinue) {
+            btnContinue.addEventListener('click', function() {
+                const checked = Array.from(checkboxes).filter(cb => cb.checked && !cb.disabled);
+                if (checked.length === 0) {
+                    alert('Vui lòng chọn ít nhất 1 ghế trước khi tiếp tục!');
+                    return;
+                }
+                document.getElementById('seatsForm').submit();
+            });
+        }
+
+        // Live Real-Time Polling: Synchronize seats with POS and other online bookings every 3 seconds
+        const showtimeId = '{{ $showtime->id }}';
+        function pollSeatStatus() {
+            fetch(`{{ url('booking/seats') }}/${showtimeId}/status`, {
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && Array.isArray(data.booked_seats)) {
+                    const bookedIds = data.booked_seats.map(id => parseInt(id));
+
+                    checkboxes.forEach(cb => {
+                        const seatId = parseInt(cb.value);
+                        const isBooked = bookedIds.includes(seatId);
+                        const seatCell = cb.closest('label')?.querySelector('.seat-cell');
+
+                        if (isBooked) {
+                            if (cb.checked) {
+                                cb.checked = false;
+                                showToast(`Ghế ${cb.dataset.label} vừa được chọn/đặt tại quầy POS hoặc khách khác. Đã tự động bỏ chọn!`);
+                                updateSummary();
+                            }
+                            cb.disabled = true;
+                            if (seatCell) {
+                                seatCell.classList.add('!bg-gray-800', '!text-gray-600', '!border-gray-700', 'cursor-not-allowed', 'opacity-40', 'seat-booked');
+                            }
+                        } else {
+                            if (cb.disabled) {
+                                cb.disabled = false;
+                                if (seatCell) {
+                                    seatCell.classList.remove('!bg-gray-800', '!text-gray-600', '!border-gray-700', 'cursor-not-allowed', 'opacity-40', 'seat-booked');
+                                }
+                            }
+                        }
+                    });
+                }
+            })
+            .catch(err => console.error('Lỗi kiểm tra trạng thái ghế trực tiếp:', err));
+        }
+
+        // Poll every 3 seconds
+        setInterval(pollSeatStatus, 3000);
     });
 </script>
 @endsection

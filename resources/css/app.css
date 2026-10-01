@@ -283,6 +283,14 @@ html.light-mode .text-gray-400 {
     color: #64748b !important;
 }
 
+html.light-mode .text-orange-400 {
+    color: #ea580c !important;
+}
+
+html.light-mode .text-orange-500 {
+    color: #ea580c !important;
+}
+
 html.light-mode .border-white\/10,
 html.light-mode .border-white\/20,
 html.light-mode .border-white\/30,
@@ -1205,12 +1213,174 @@ html.light-mode .relative.border-b.border-white\/10 p {
 
 /* Cinema & Showtimes Containers */
 html.light-mode .cinema-scroll-list {
-    background-color: #ffffff !important;
-    border-color: #e2e8f0 !important;
+    background-color: transparent !important;
+}
+
+html.light-mode .cinema-scroll-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05) !important;
 }
 
 html.light-mode .cinema-scroll-list::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+html.light-mode .cinema-scroll-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Inactive Cinema Cards in Light Mode */
+html.light-mode .cinema-card {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    color: #0f172a !important;
+}
+
+html.light-mode .cinema-card:hover {
+    background-color: #fffaf5 !important;
+    border-color: #fdba74 !important;
+    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.12) !important;
+}
+
+html.light-mode .cinema-card .cinema-name {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+html.light-mode .cinema-card:hover .cinema-name {
+    color: #ea580c !important;
+}
+
+html.light-mode .cinema-card .cinema-sub {
+    color: #64748b !important;
+}
+
+html.light-mode .cinema-card .cinema-card-actions {
+    border-top: 1px solid #f1f5f9 !important;
+}
+
+html.light-mode .cinema-card .cinema-action-detail {
+    color: #ea580c !important;
+    font-weight: 700 !important;
+}
+
+html.light-mode .cinema-card .cinema-action-detail:hover {
+    color: #c2410c !important;
+}
+
+html.light-mode .cinema-card .cinema-action-dir {
+    color: #64748b !important;
+    font-weight: 500 !important;
+}
+
+html.light-mode .cinema-card .cinema-action-dir:hover {
+    color: #0f172a !important;
+}
+
+html.light-mode .cinema-card .cinema-action-sep {
+    color: #cbd5e1 !important;
+}
+
+/* ACTIVE Cinema Card in Light Mode - Warm Amber High Contrast */
+html.light-mode .cinema-card.is-active,
+html.light-mode .cinema-card.bg-\[\#221f1d\] {
+    background-color: #fff7ed !important;
+    border: 2px solid #ea580c !important;
+    box-shadow: 0 6px 24px rgba(234, 88, 12, 0.18) !important;
+}
+
+html.light-mode .cinema-card.is-active .cinema-name,
+html.light-mode .cinema-card.bg-\[\#221f1d\] .cinema-name {
+    color: #c2410c !important;
+    font-weight: 800 !important;
+}
+
+html.light-mode .cinema-card.is-active .cinema-sub,
+html.light-mode .cinema-card.bg-\[\#221f1d\] .cinema-sub {
+    color: #334155 !important;
+    font-weight: 500 !important;
+}
+
+html.light-mode .cinema-card.is-active .cinema-active-badge,
+html.light-mode .cinema-card.bg-\[\#221f1d\] .cinema-active-badge {
+    color: #ea580c !important;
+    font-weight: 700 !important;
+}
+
+html.light-mode .cinema-card.is-active .cinema-card-actions,
+html.light-mode .cinema-card.bg-\[\#221f1d\] .cinema-card-actions {
+    border-top: 1px solid #fed7aa !important;
+}
+
+html.light-mode .cinema-card.is-active .cinema-action-detail,
+html.light-mode .cinema-card.bg-\[\#221f1d\] .cinema-action-detail {
+    color: #c2410c !important;
+    font-weight: 800 !important;
+}
+
+html.light-mode .cinema-card.is-active .cinema-action-dir,
+html.light-mode .cinema-card.bg-\[\#221f1d\] .cinema-action-dir {
+    color: #475569 !important;
+    font-weight: 600 !important;
+}
+
+html.light-mode .cinema-card.is-active .cinema-action-sep,
+html.light-mode .cinema-card.bg-\[\#221f1d\] .cinema-action-sep {
+    color: #fdba74 !important;
+}
+
+/* City Filter Buttons in Light Mode */
+html.light-mode .city-btn.active {
+    background-color: #ea580c !important;
+    border-color: #ea580c !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3) !important;
+}
+
+html.light-mode .city-btn:not(.active) {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    color: #475569 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light-mode .city-btn:not(.active):hover {
+    background-color: #fff7ed !important;
+    border-color: #ea580c !important;
+    color: #ea580c !important;
+}
+
+/* Recenter Button in Light Mode */
+html.light-mode #btn-recenter {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #1e293b !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) !important;
+}
+
+html.light-mode #btn-recenter:hover {
+    background-color: #fff7ed !important;
+    border-color: #ea580c !important;
+    color: #ea580c !important;
+}
+
+/* Cinema Map Canvas Wrapper in Light Mode */
+html.light-mode .cinema-map-wrapper {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Map Overlay Legend in Light Mode */
+html.light-mode .map-overlay-badge {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light-mode .map-overlay-badge span.text-gray-200 {
+    color: #1e293b !important;
+    font-weight: 600 !important;
 }
 
 /* Form Controls & Inputs */
@@ -1912,10 +2082,10 @@ html.light-mode .checkout-voucher-item p {
 .showtime-movie-card {
     background-color: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
+    border-radius: 1.25rem;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 html.light-mode .showtime-movie-card {
     background-color: #ffffff !important;
@@ -1935,53 +2105,159 @@ html.light-mode .showtime-cinema-title svg {
     color: #e50914 !important;
 }
 
+/* Strict Showtime Poster Frame */
+.showtime-poster-col {
+    width: 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+    flex-shrink: 0 !important;
+}
+@media (max-width: 767px) {
+    .showtime-poster-col {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+.showtime-poster-card {
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+    height: 300px !important;
+    min-height: 300px !important;
+    max-height: 300px !important;
+    aspect-ratio: 2 / 3 !important;
+    border-radius: 0.85rem !important;
+    overflow: hidden !important;
+    position: relative !important;
+    display: block !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15) !important;
+    background-color: #0f172a !important;
+    margin: 0 auto !important;
+}
+.showtime-poster-card img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+/* Filter Card */
+.showtime-filter-card {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+html.light-mode .showtime-filter-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+html.light-mode .filter-label {
+    color: #334155 !important;
+}
+html.light-mode .cinema-pill:not(.bg-cinematic-red) {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #1e293b !important;
+}
+html.light-mode .cinema-pill:not(.bg-cinematic-red):hover {
+    background-color: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+html.light-mode .date-tab-btn:not(.bg-gradient-to-b) {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #1e293b !important;
+}
+html.light-mode .date-tab-btn:not(.bg-gradient-to-b):hover {
+    background-color: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+
+/* Empty Showtime Card */
+.empty-showtime-card {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+html.light-mode .empty-showtime-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+html.light-mode .empty-showtime-card h3 {
+    color: #0f172a !important;
+}
+html.light-mode .empty-showtime-card p {
+    color: #64748b !important;
+}
+
+/* Showtime Slot Buttons */
 .showtime-slot-btn {
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0.6rem 1.1rem !important;
+    padding: 0.75rem 0.85rem !important;
     border-radius: 0.85rem !important;
-    background-color: rgba(255, 255, 255, 0.06) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
-    transition: all 0.25s ease !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.2s ease !important;
     text-decoration: none !important;
-    min-width: 95px !important;
+    min-width: 135px !important;
     cursor: pointer !important;
 }
-.showtime-slot-btn .slot-date {
-    font-size: 0.6875rem !important;
-    font-weight: 600 !important;
-    color: #94a3b8 !important;
-    transition: color 0.2s ease !important;
-    margin-bottom: 2px !important;
-}
 .showtime-slot-btn .slot-time {
-    font-size: 1.125rem !important;
+    font-size: 1.15rem !important;
     font-weight: 900 !important;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
     color: #ffffff !important;
-    line-height: 1.25 !important;
+    line-height: 1.2 !important;
     transition: color 0.2s ease !important;
 }
+.showtime-slot-btn .slot-format {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #cbd5e1 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+.showtime-slot-btn .slot-room {
+    color: #94a3b8 !important;
+    font-size: 0.7rem !important;
+}
+.showtime-slot-btn .slot-room strong {
+    color: #f1f5f9 !important;
+}
+.showtime-slot-btn .slot-divider {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
 .showtime-slot-btn .slot-price {
-    font-size: 0.6875rem !important;
-    font-weight: 700 !important;
+    font-size: 0.75rem !important;
+    font-weight: 800 !important;
     color: #fbbf24 !important;
-    transition: color 0.2s ease !important;
-    margin-top: 2px !important;
+}
+.showtime-slot-btn .slot-avail {
+    font-size: 0.65rem !important;
+    color: #34d399 !important;
 }
 .showtime-slot-btn:hover {
     background-color: #e50914 !important;
     border-color: #e50914 !important;
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(229, 9, 20, 0.45) !important;
+    box-shadow: 0 8px 20px rgba(229, 9, 20, 0.4) !important;
 }
-.showtime-slot-btn:hover .slot-date,
 .showtime-slot-btn:hover .slot-time,
-.showtime-slot-btn:hover .slot-price {
+.showtime-slot-btn:hover .slot-format,
+.showtime-slot-btn:hover .slot-room,
+.showtime-slot-btn:hover .slot-room strong,
+.showtime-slot-btn:hover .slot-price,
+.showtime-slot-btn:hover .slot-avail {
     color: #ffffff !important;
+}
+.showtime-slot-btn:hover .slot-format {
+    background-color: rgba(0, 0, 0, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+.showtime-slot-btn:hover .slot-divider {
+    border-color: rgba(255, 255, 255, 0.25) !important;
 }
 
 /* Light mode for showtime slot buttons */
@@ -1990,24 +2266,44 @@ html.light-mode .showtime-slot-btn {
     border: 1.5px solid #cbd5e1 !important;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
 }
-html.light-mode .showtime-slot-btn .slot-date {
+html.light-mode .showtime-slot-btn .slot-time {
+    color: #0f172a !important;
+}
+html.light-mode .showtime-slot-btn .slot-format {
+    background-color: #e2e8f0 !important;
+    color: #334155 !important;
+    border-color: #cbd5e1 !important;
+}
+html.light-mode .showtime-slot-btn .slot-room {
     color: #64748b !important;
 }
-html.light-mode .showtime-slot-btn .slot-time {
-    color: #0f172a !important; /* Bold, high contrast dark slate */
+html.light-mode .showtime-slot-btn .slot-room strong {
+    color: #0f172a !important;
+}
+html.light-mode .showtime-slot-btn .slot-divider {
+    border-color: #e2e8f0 !important;
 }
 html.light-mode .showtime-slot-btn .slot-price {
-    color: #b45309 !important; /* Rich amber cinema gold */
+    color: #b45309 !important;
+}
+html.light-mode .showtime-slot-btn .slot-avail {
+    color: #059669 !important;
 }
 html.light-mode .showtime-slot-btn:hover {
     background-color: #e50914 !important;
     border-color: #e50914 !important;
-    box-shadow: 0 6px 20px rgba(229, 9, 20, 0.35) !important;
+    box-shadow: 0 8px 20px rgba(229, 9, 20, 0.35) !important;
 }
-html.light-mode .showtime-slot-btn:hover .slot-date,
 html.light-mode .showtime-slot-btn:hover .slot-time,
-html.light-mode .showtime-slot-btn:hover .slot-price {
+html.light-mode .showtime-slot-btn:hover .slot-format,
+html.light-mode .showtime-slot-btn:hover .slot-room,
+html.light-mode .showtime-slot-btn:hover .slot-room strong,
+html.light-mode .showtime-slot-btn:hover .slot-price,
+html.light-mode .showtime-slot-btn:hover .slot-avail {
     color: #ffffff !important;
+}
+html.light-mode .showtime-slot-btn:hover .slot-divider {
+    border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 /* ========================================================
@@ -2091,7 +2387,224 @@ html.light-mode .heroSwiper .swiper-button-prev:hover {
     color: #ffffff !important;
 }
 
+/* Light Mode for Top 10 Phim Hot - High Contrast, Sharp & Crisp */
+html.light-mode #top-10-hot-section {
+    background-color: #f1f5f9 !important;
+    border-color: #e2e8f0 !important;
+}
+html.light-mode #top-10-hot-section .section-title {
+    color: #0f172a !important;
+}
+html.light-mode #top-10-hot-section .top-hot-movie-title {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+}
+html.light-mode #top-10-hot-section .top-hot-movie-sub {
+    color: #1e293b !important; /* Đậm nét, không bị mờ */
+    font-weight: 600 !important;
+}
+html.light-mode #top-10-hot-section .top-hot-movie-meta {
+    color: #0f172a !important; /* Đậm nét rõ ràng */
+    font-weight: 600 !important;
+}
+html.light-mode #top-10-hot-section .top-hot-nav-btn {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #1e293b !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+}
+html.light-mode #top-10-hot-section .top-hot-nav-btn:hover {
+    background-color: #e6b85c !important;
+    color: #000000 !important;
+    border-color: #e6b85c !important;
+}
 
+/* ========================================================
+   LIGHT MODE FOR QR PAYMENT PAGE (pay-qr.blade.php)
+   ======================================================== */
+html.light-mode .qr-card-box {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important;
+}
+html.light-mode .qr-page-title {
+    color: #0f172a !important;
+}
+html.light-mode .qr-page-subtitle {
+    color: #334155 !important;
+    font-weight: 500 !important;
+}
+html.light-mode .qr-bank-info-title {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+}
+html.light-mode .qr-bank-label {
+    color: #334155 !important;
+    font-weight: 700 !important;
+}
+html.light-mode .qr-bank-name {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+}
+html.light-mode .qr-info-row {
+    background-color: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+}
+html.light-mode .qr-info-row:hover {
+    border-color: #2563eb !important;
+    background-color: #f1f5f9 !important;
+}
+html.light-mode .qr-info-label {
+    color: #334155 !important;
+    font-weight: 700 !important;
+    font-size: 0.75rem !important;
+}
+html.light-mode .qr-info-value {
+    color: #0f172a !important;
+    font-weight: 900 !important;
+}
+html.light-mode .qr-bank-sub {
+    color: #1e293b !important;
+    font-weight: 700 !important;
+}
+html.light-mode .qr-info-value-gold {
+    color: #b45309 !important; /* Deep rich amber cinema gold */
+    font-weight: 900 !important;
+}
 
+/* NÚT SAO CHÉP SỐ TÀI KHOẢN TRONG LIGHT MODE - CHỮ TRẮNG NỀN XANH RÕ NÉT */
+html.light-mode .qr-copy-account-btn {
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+    border-color: #1d4ed8 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3) !important;
+}
+html.light-mode .qr-copy-account-btn:hover {
+    background-color: #1d4ed8 !important;
+    color: #ffffff !important;
+}
+html.light-mode .qr-copy-account-btn svg {
+    color: #ffffff !important;
+}
 
+/* NÚT SAO CHÉP SỐ TIỀN TRONG LIGHT MODE - CHỮ ĐEN ĐẬM NỀN VÀNG RÕ NÉT */
+html.light-mode .qr-copy-amount-btn {
+    background-color: #f59e0b !important;
+    color: #000000 !important;
+    border-color: #d97706 !important;
+    font-weight: 800 !important;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3) !important;
+}
+html.light-mode .qr-copy-amount-btn:hover {
+    background-color: #d97706 !important;
+    color: #ffffff !important;
+}
+html.light-mode .qr-copy-amount-btn svg {
+    color: #000000 !important;
+}
+html.light-mode .qr-copy-amount-btn:hover svg {
+    color: #ffffff !important;
+}
 
+/* KHỐI NỘI DUNG CHUYỂN KHOẢN TRONG LIGHT MODE */
+html.light-mode .qr-transfer-box {
+    background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%) !important;
+    border: 2px solid #2563eb !important;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.15) !important;
+}
+html.light-mode .qr-transfer-label {
+    color: #1e3a8a !important;
+    font-weight: 800 !important;
+}
+html.light-mode .qr-transfer-code {
+    color: #b45309 !important;
+    font-weight: 900 !important;
+}
+html.light-mode .qr-transfer-note {
+    color: #1e293b !important;
+    font-weight: 600 !important;
+}
+html.light-mode .qr-transfer-bold {
+    color: #000000 !important;
+    font-weight: 900 !important;
+}
+
+/* KHỐI ĐANG CHỜ QUÉT MÃ */
+html.light-mode .qr-waiting-box {
+    background-color: #eff6ff !important;
+    border-color: #93c5fd !important;
+}
+html.light-mode .qr-waiting-text {
+    color: #1e3a8a !important;
+    font-weight: 700 !important;
+}
+
+/* NÚT TẢI ẢNH QR & COPY CÚ PHÁP */
+html.light-mode .qr-btn-action {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+    font-weight: 700 !important;
+}
+html.light-mode .qr-btn-action:hover {
+    background-color: #f1f5f9 !important;
+    border-color: #94a3b8 !important;
+}
+html.light-mode .qr-btn-copy {
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+    border-color: #1d4ed8 !important;
+    font-weight: 700 !important;
+}
+html.light-mode .qr-btn-copy:hover {
+    background-color: #1d4ed8 !important;
+}
+
+/* HƯỚNG DẪN 3 BƯỚC */
+html.light-mode .qr-instructions {
+    border-color: #e2e8f0 !important;
+    color: #1e293b !important;
+}
+html.light-mode .qr-instructions p {
+    color: #334155 !important;
+    font-weight: 500 !important;
+}
+html.light-mode .qr-instructions strong {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+/* SUMMARY CARD */
+html.light-mode .qr-summary-title {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+}
+html.light-mode .qr-summary-movie-title {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+}
+html.light-mode .qr-summary-cinema {
+    color: #475569 !important;
+    font-weight: 600 !important;
+}
+html.light-mode .qr-summary-time {
+    color: #b45309 !important;
+    font-weight: 700 !important;
+}
+html.light-mode .qr-summary-label {
+    color: #475569 !important;
+    font-weight: 700 !important;
+}
+html.light-mode .qr-summary-seats {
+    color: #b45309 !important;
+    font-weight: 800 !important;
+}
+html.light-mode .qr-summary-total-label {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+}
+html.light-mode .qr-summary-total-val {
+    color: #b45309 !important;
+    font-weight: 900 !important;
+}

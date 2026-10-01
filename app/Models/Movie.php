@@ -26,12 +26,12 @@ class Movie extends Model
     }
 
     /**
-     * Relationship to upcoming showtimes that have not yet started.
+     * Relationship to upcoming or active showtimes.
      */
     public function upcomingShowtimes()
     {
         return $this->hasMany(Showtime::class)
-                    ->where('start_time', '>=', now())
+                    ->where('start_time', '>=', now()->subHours(4))
                     ->orderBy('start_time', 'asc');
     }
 
